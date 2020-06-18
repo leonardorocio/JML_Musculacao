@@ -10,6 +10,7 @@ body {
 
 a {
     color: white;
+    text-decoration: none;
 }
 
 .header {
@@ -40,7 +41,6 @@ a {
     display: flex;
     background-color: #4BD1A0;
 
-    
 }
 
 .txt-img {
@@ -65,13 +65,13 @@ a {
 
 .list-2{
     float: right;
-    width: 550px;
+    width: 650px;
     display: flex;
     justify-content: flex-end;
     margin-right: 20px;
 }
 
-li{
+.navbar li{
     display: inline;
 }
 
@@ -96,3 +96,38 @@ li a {
     background-color: #4BD1A0;
     border: 3px solid #4BD1A0;
 }
+
+.txt-ben {
+    width: 40%;
+    margin-left: 5%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+}
+
+.txt-ben ul {
+    width: 50%;
+    height: 50%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.txt-ben li {
+    display: flex;
+    margin-right: 10%;
+}
+
+/* Teste de layout do texto dos benefícios */
+
+/* 
+.txt-ben li {
+    text-align: justify;
+} */
+
