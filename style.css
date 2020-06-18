@@ -5,7 +5,7 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: sans-serif;
-    grid-template-rows: 50% 40% 30% 22% 5% auto;
+    grid-template-rows: 50% 45% 30% 22% 5% auto;
 }
 
 a {
@@ -19,7 +19,6 @@ a {
     height:200%;
     background-repeat: no-repeat;
     font-size: 19px;
-    margin-bottom: 10.5%;
 }
 
 .gm-in {
@@ -30,11 +29,13 @@ a {
     font-size: 14px;
     margin-left: 14px;
 
+
 }
 
 .gm-in li {
     display: inline;
     padding-left: 20px;
+    padding-bottom: 1%;
 }
 
 .ben-img {
@@ -65,10 +66,10 @@ a {
 
 .list-2{
     float: right;
-    width: 650px;
+    width:  10%;
     display: flex;
     justify-content: flex-end;
-    margin-right: 20px;
+    margin-left: 33%;
 }
 
 .navbar li{
