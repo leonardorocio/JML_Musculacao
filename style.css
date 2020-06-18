@@ -111,7 +111,7 @@ li a {
 }
 
 .txt-ben ul {
-    width: 50%;
+    width: 60%;
     height: 50%;
     font-size: 20px;
     display: flex;
@@ -120,10 +120,11 @@ li a {
     justify-content: flex-start;
 }
 
-.txt-ben li {
+.txt-ben li  {
     display: flex;
-    margin-right: 10%;
+    margin-right: 10%; 
 }
+
 
 /* Teste de layout do texto dos benefícios */
 
