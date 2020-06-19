@@ -7,68 +7,26 @@ body {
     font-family: sans-serif;
 }
 
-a {
-    color: white;
-    text-decoration: none;
-}
-
 .header {
     background-image: url("images/header.jpg");
     background-size: 100%;
-    height:200%;
     background-repeat: no-repeat;
-    font-size: 19px;
-}
-
-.gm-in {
-    display: flex;
-    align-items: center;
-    margin-top: 500px;
-    color: ivory;
-    font-size: 14px;
-    margin-left: 14px;
-
-
-}
-
-.gm-in li {
-    display: inline;
-    padding-left: 20px;
-    padding-bottom: 1%;
-}
-
-.ben-img {
-    display: flex;
-    background-color: #4BD1A0;
-
-}
-
-.txt-img {
-    width: 50%;
-}
-
-.navbar img {
-    margin-top: 20px;
-    margin-left: 40px;
+    font-size: 1.8rem;
 }
 
 .navbar {
     display: flex;
     align-items: center;
+}
 
+.navbar img {
+    margin-top: 20px;
+    margin-left: 40px;
+    width: 100px;
 }
 
 .navbar ul {
     padding-top: 30px;
-  
-}
-
-.list-2{
-    float: right;
-    width:  10%;
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 33%;
 }
 
 .navbar li{
@@ -77,7 +35,15 @@ a {
 
 li a {
     padding-left: 20px;
-    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.inscricao{
+    width: 10%;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 33%;
 }
 
 .active2 {
@@ -97,10 +63,32 @@ li a {
     border: 3px solid #4BD1A0;
 }
 
-.txt-ben {
+.contats {
+    display: flex;
+    align-items: center;
+    margin-top: 500px;
+    color: ivory;
+    font-size: 1.3rem;
+    margin-left: 14px;
+}
+
+.contats li {
+    display: inline;
+    padding-left: 20px;
+    padding-bottom: 1%;
+}
+
+.benefits {
+    display: flex;
+    background-color: #4BD1A0;
+    max-height: 85%;
+
+}
+
+.benefits-texts {
     width: 40%;
     margin-left: 5%;
-    font-size: 20px;
+    font-size: 1.6rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -109,25 +97,26 @@ li a {
     text-align: center;
 }
 
-.txt-ben ul {
-    width: 60%;
+.benefits-texts ul {
+    width: 50%;
     height: 50%;
-    font-size: 20px;
+    font-size: 1.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
 }
 
-.txt-ben li  {
+.benefits-texts li {
     display: flex;
-    margin-right: 10%; 
 }
+
+
 
 .treinos span {
+    margin-top: -50px;
     display: flex;
     justify-content: center;
-    font-size: 60px;
+    font-size: 5rem;
     font-family: 'Anton';
     color: #333333;
     letter-spacing: 4px;
@@ -140,8 +129,10 @@ li a {
 } 
 
 .slideshow-container img {
-    width: 1000px;
+    /* width: 98.79vw; */
+    width: 80vw;
     height: 500px;
+    border-radius: 20px;
 }
 
 .mySlides {
@@ -151,6 +142,7 @@ li a {
 .prev, .next {
     cursor: pointer;
     position: absolute;
+    top: 45%;
     width: auto;
     padding: 16px;
     color: white;
@@ -158,7 +150,6 @@ li a {
     font-size: 18px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
-    user-select: none;
 }
 
 .next {
