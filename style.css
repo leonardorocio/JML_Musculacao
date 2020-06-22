@@ -11,7 +11,8 @@ body {
     background-image: url("images/header.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
+    height: 44rem;
 }
 
 .navbar {
@@ -31,6 +32,7 @@ body {
 
 .navbar li{
     display: inline;
+    
 }
 
 li a {
@@ -44,6 +46,7 @@ li a {
     display: flex;
     justify-content: flex-end;
     margin-left: 33%;
+    
 }
 
 .active2 {
@@ -68,7 +71,7 @@ li a {
     align-items: center;
     margin-top: 500px;
     color: ivory;
-    font-size: 1.3rem;
+    font-size: 1.0rem;
     margin-left: 14px;
 }
 
@@ -88,7 +91,7 @@ li a {
 .benefits-texts {
     width: 40%;
     margin-left: 5%;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -100,10 +103,11 @@ li a {
 .benefits-texts ul {
     width: 50%;
     height: 50%;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Anton', sans-serif;
 }
 
 .benefits-texts li {
