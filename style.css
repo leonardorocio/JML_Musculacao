@@ -199,3 +199,112 @@ li a {
 
 
 
+.alimentacao {
+    display: flex;
+    margin-top: 8%;
+    justify-content: center;
+    width: 100%;
+}
+
+.txt-ali {
+    font-family: 'Anton';
+    position: absolute;
+    color: whitesmoke;
+    font-size: 1.9rem;
+        
+}
+
+.dieta {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.dieta a {
+    margin-top: 10%;
+}
+
+.suplementacao {
+    width: 54%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.suplementacao a{
+    margin-top: 10%;
+}
+
+.active3 {
+    padding: 16px 32px;
+    text-align: center;
+    padding: 20px;
+    /* padding-left: 50px;
+    padding-right: 50px; */
+    display: flex;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    position: absolute;
+    background-color: #4BD1A0; 
+    color: white; 
+    border: 3px solid #4BD1A0;
+    border-radius: 30px;
+    font-family: 'Anton';
+    font-size: 1.8rem;
+    width: 25%;
+    justify-content: center;
+
+
+}
+
+.active3:hover {
+    background-color: transparent;
+    color: white
+}
+
+.footer{
+    background-color: #333333;
+    margin-top: 8%;
+    display: flex
+}
+
+.inic {
+    color: white;
+    display: flex;
+    font-family: 'Anton';
+    flex-direction: column;
+
+}
+
+.sobr {
+    color: white;
+    display: flex;
+    font-family: 'Anton';
+    flex-direction: column;
+
+}
+
+.supo {
+    color: white;
+    display: flex;
+    font-family: 'Anton';
+    flex-direction: column;
+
+}
+
+.siga {
+    color: white;
+    display: flex;
+    font-family: 'Anton';
+    flex-direction: column;
+
+}
+
+
+
+
+
