@@ -133,9 +133,8 @@ li a {
 } 
 
 .slideshow-container img {
-    /* width: 98.79vw; */
-    width: 80vw;
-    height: 500px;
+    width: 88vw;
+    height: 600px;
     border-radius: 20px;
 }
 
