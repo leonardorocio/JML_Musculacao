@@ -273,43 +273,77 @@ li a {
     background-color: #333333;
     margin-top: 8%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .footer img {
-    width: 150px;
+    width: 15%;
+    max-height: 50%;
+    margin-left: 2%;
+    margin-top: 2%;
 }
 
 .inic {
     color: white;
     display: flex;
-    font-family: 'Anton';
+    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
+    width: 10%;
+}
 
+.inic h1 {
+    font-family: 'Anton';
+    
 }
 
 .sobr {
     color: white;
     display: flex;
-    font-family: 'Anton';
+    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
+    width: 10%;
+}
 
+.sobr h1{
+    font-family: 'Anton';
 }
 
 .supo {
     color: white;
     display: flex;
-    font-family: 'Anton';
+    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
+    width: 10%;
+}
 
+.supo h1 {
+    font-family: 'Anton';
 }
 
 .siga {
     color: white;
     display: flex;
-    font-family: 'Anton';
+    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
 
+.siga h1 {
+    font-family: 'Anton';
+}
+
+.siga ul li{
+    display: flex;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+}
+
+.copy {
+    color: black
 }
 
 
