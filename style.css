@@ -205,6 +205,10 @@ li a {
     width: 100%;
 }
 
+.alimentacao img {
+    width: 100%;
+}
+
 .txt-ali {
     font-family: 'Anton';
     position: absolute;
