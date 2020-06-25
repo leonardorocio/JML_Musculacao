@@ -141,6 +141,7 @@ li a {
     display: none;
 }
 
+
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -213,8 +214,7 @@ li a {
     font-family: 'Anton';
     position: absolute;
     color: whitesmoke;
-    font-size: 190%;
-        
+    font-size: 190%;    
 }
 
 .dieta {
@@ -273,78 +273,49 @@ li a {
     background-color: #333333;
     margin-top: 8%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .footer img {
-    width: 15%;
-    max-height: 50%;
-    margin-left: 2%;
-    margin-top: 2%;
+    width: 200px;
 }
 
-.inic {
-    color: white;
+.footer_column {
+    color: #4BD1A0;
     display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    flex-direction: column;
-    width: 10%;
-}
-
-.inic h1 {
     font-family: 'Anton';
-    
-}
-
-.sobr {
-    color: white;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
-    width: 10%;
+    width: 12%;
 }
 
-.sobr h1{
-    font-family: 'Anton';
+.footer_column p {
+    font-size: 140%;
 }
 
-.supo {
-    color: white;
+
+
+.footer_column:nth-child(5) {
+    margin-right: 4%;
     display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    flex-direction: column;
-    width: 10%;
-}
-
-.supo h1 {
-    font-family: 'Anton';
-}
-
-.siga {
-    color: white;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
     flex-direction: column;
     align-items: center;
-    width: 20%;
 }
 
-.siga h1 {
-    font-family: 'Anton';
-}
-
-.siga ul li{
+.footer_column ul {
     display: flex;
+    list-style-type: none;
+    flex-direction: column;
+    margin-right: 15%;
+    font-size: 120%;
 }
 
+.icons img {
+    width: 33.3%;
+} 
 .icons {
     display: flex;
-    justify-content: center;
 }
 
-.copy {
-    color: black
-}
 
 
 
