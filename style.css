@@ -41,7 +41,7 @@ li a {
     text-decoration: none;
 }
 
-.inscricao{
+.inscricao {
     width: 10%;
     display: flex;
     justify-content: flex-end;
@@ -50,14 +50,12 @@ li a {
 
 .active2 {
     display: flex;
-    padding: 20px;
+    padding: 20px 30px;
     border-radius: 40px;
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin: 0 10px 10px 0;
     transition-duration: 0.4s;
     border: 3px solid #4BD1A0;
+    cursor: pointer;
 }
 
 .active2:hover {
@@ -68,16 +66,14 @@ li a {
 .contats {
     display: flex;
     align-items: center;
-    margin-top: 500px;
     color: ivory;
     font-size: 80%;
-    margin-left: 14px;
+    margin: 35% 0 0 14px; 
 }
 
 .contats li {
     display: inline;
-    padding-left: 20px;
-    padding-bottom: 1%;
+    padding: 0 0 1% 20px;
 }
 
 /* Benefícios */
@@ -86,7 +82,6 @@ li a {
     display: flex;
     background-color: #4BD1A0;
     max-height: 85%;
-
 }
 
 .benefits-texts {
@@ -239,9 +234,8 @@ li a {
 }
 
 .active3 {
-    padding: 16px 32px;
+    padding: 20px 32px 20px 0;
     text-align: center;
-    padding: 20px;
     display: flex;
     margin: 4px 2px;
     transition-duration: 0.4s;
@@ -263,6 +257,8 @@ li a {
     background-color: transparent;
     color: white
 }
+
+/* Footer estará presente em todas as pg */
 
 .footer {
     background-color: #333333;
@@ -302,12 +298,13 @@ li a {
     font-size: 120%;
 }
 
-.icons img {
-    width: 33.3%;
-} 
 .icons {
     display: flex;
 }
+
+.icons img {
+    width: 33.3%;
+} 
 
 .copy {
     display: flex;
