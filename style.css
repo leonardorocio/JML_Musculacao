@@ -5,6 +5,7 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: sans-serif;
+    grid-template-rows: 22.5% 20% auto auto auto 0px 21% 15% 2%;
 }
 
 /* Cabeçalho do Site */
@@ -14,7 +15,6 @@ body {
     background-size: 100%;
     background-repeat: no-repeat;
     font-size: 125%;
-    height: 44rem;
 }
 
 .navbar {
@@ -249,6 +249,7 @@ li a {
     font-size: 180%;
     width: 25%;
     justify-content: center;
+    text-decoration: none;
 
 
 }
