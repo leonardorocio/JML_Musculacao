@@ -5,7 +5,7 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: sans-serif;
-    grid-template-rows: 22.5% 20% auto auto auto 0px 21% 15% 2%;
+    grid-template-rows: 22.5% 20% repeat(4,auto) 21% 15% 2%;
 }
 
 /* Cabeçalho do Site */
