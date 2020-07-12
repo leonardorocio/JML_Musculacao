@@ -10,6 +10,33 @@
     
 </head>
 <body>
-    
+	<div class="formulário">
+    <form action = "submission.html" method="POST">
+        <label for="name">Nome completo:</label>
+        <input type="text" name = "name" id = "name" placeholder="Ex: Leonardo Fagundes Rócio" minlength="6" maxlength="50">
+
+        <label for="age">Idade:</label>
+				<input type="number" name="age" id="age" placeholder="Idade em anos" min = "15" max = "80">
+
+				<section class = "sex-radio"></section>
+					<label for="sex">Sexo:</label>
+				
+					<input type="radio" name="sex" id= "fem" value="feminino">
+					<label for="fem">Feminino</label>
+
+					<input type="radio" name = "sex" id = "masc" value = "masculino">
+					<label for="masc">Masculino</label>
+				</section>
+
+        <label for="e-mail">E-mail:</label>
+				<input type="email" name="e-mail" id="e-mail" placeholder="Ex:contato@JML_musc.com">
+				
+				<label for="senha">Senha:</label>
+				<input type="password" name="senha" id="senha" placeholder="Senha de pelo menos 8 caracteres" minlength="8">
+
+        <input type="submit" value="Cadastrar">
+
+		</form>
+	</div>
 </body>
 </html>
