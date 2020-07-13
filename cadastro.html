@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton:200,300,400,600">
+    <title>Login | JML Musculação</title>
+    
+</head>
+<body>
+	<div class="formulário">
+		<h1>Cadastro</h1>
+
+		<div class="line">
+			<img src="images/icone_rosto.jpg" alt="Representação de um rosto">
+		</div>
+
+		<br><br><br><br>
+
+    <form action = "submission.html" method="POST">
+			<section class="personal-info">
+				<img src="images/icone rosto input.png" alt="Test">
+				<input type="text" placeholder="Nome de Usuário" id="names" name="names" minlength="5">
+			</section>
+
+			<section class= "personal-info">
+				<img src="images/icon_gmail.png" alt="Test">
+				<input type="email" name="e-mail" id="e-mail" placeholder="Email">
+			</section>
+		
+			<section class= "personal-info">
+				<img src="images/icone_cadeado.png" alt="Test">
+				<input type="password" name="passw" id="passw" placeholder="Senha" minlength="8">
+			</section>
+		<input type="submit" value="Inscrever-se" id="send">
+		
+		</form>
+
+		<div class="inscrito">
+			<span>Já cadastrado? Faça <a href ="login.html">Login</a></span>
+		</div>
+
+	</div>
+</body>
+</html>
