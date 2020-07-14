@@ -6,6 +6,7 @@ body {
     padding: 0;
     min-height: 100vh;
     font-family: sans-serif;
+    justify-content: center;
 }
 
 /* Cabeçalho do Site */
@@ -15,6 +16,9 @@ header {
     background-size: 100%;
     background-repeat: no-repeat;
     font-size: 125%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 nav {
@@ -81,6 +85,7 @@ li a {
 .benefits {
     display: flex;
     background-color: #4BD1A0;
+    margin-top: -1%;
     max-height: 75%;
 }
 
@@ -322,10 +327,10 @@ footer img {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: solid 6px white;
+    border: solid 6px #333333;
     border-radius: 20px;
     background-color: #4BD1A0;
-    color: white;
+    color: #333333;
     font-family: 'Anton';
     letter-spacing: 4px;
     font-size: large;
@@ -380,12 +385,12 @@ input:focus {
     background-color: white;
     border: solid 2px white;
     border-radius: 20px;
-
+    cursor: pointer;
 }
 
 .line {
     width: 100%;
-    border-bottom: 6px solid white;
+    border-bottom: 6px solid #333333;
     height: 80px;
     text-align: center;
 }
@@ -401,5 +406,5 @@ input:focus {
 
 .inscrito a {
     text-decoration: none;
-    color: white;
+    color: #333333;
 }
