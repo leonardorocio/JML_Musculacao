@@ -22,18 +22,18 @@
 
 		<form action="index.html" method="POST">
 			<section class="personal-info">
-				<img src="images/icone rosto input.png" alt="Test" />
-				<input type="text" placeholder="Nome de Usuário" id="names" name="names" minlength="5" required />
+				<img onclick="location.href='#names'" src="images/icone rosto input.png" alt="Test" />
+				<input type="text" class="names" placeholder="Nome de Usuário" id="names" name="names" minlength="5" required />
 			</section>
 
 			<section class="personal-info">
-				<img src="images/icon_gmail.png" alt="Test" />
-				<input type="email" name="e-mail" id="e-mail" placeholder="Email" required />
+				<img onclick="location.href='#e-mail'" src="images/icon_gmail.png" alt="Test" />
+				<input type="email" class="names" name="e-mail" id="e-mail" placeholder="Email" required />
 			</section>
 
 			<section class="personal-info">
-				<img src="images/icone_cadeado.png" alt="Test" />
-				<input type="password" name="passw" id="passw" placeholder="Senha" minlength="8" required />
+				<img onclick="location.href='#passw'" src="images/icone_cadeado.png" alt="Test" />
+				<input type="password" class="names" name="passw" id="passw" placeholder="Senha" minlength="8" required />
 			</section>
 			<input type="submit" value="Inscrever-se" id="send" />
 		</form>
