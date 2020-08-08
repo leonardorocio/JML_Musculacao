@@ -24,6 +24,7 @@ header {
 nav {
     display: flex;
     align-items: center;
+    font-family: 'Lato';
 }
 
 nav img {
@@ -72,9 +73,11 @@ li a {
     margin-top: auto;
     align-self: flex-start;
     align-items: center;
+    
 }
 
 .contats button {
+    font-family: 'Lato';
     color: white;
     padding: 15px 36px;
     margin-bottom: 8%;
@@ -329,6 +332,7 @@ footer img {
 }
 
 .copy {
+    font-family: 'Lato';
     display: flex;
     color: white;
     background-color: #272626;
