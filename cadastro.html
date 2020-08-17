@@ -2,46 +2,50 @@
 <html lang="pt-br">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton:200,300,400,600" />
-	<title>Cadastro | JML Musculação</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton:200,300,400,600" />
+  <title>Cadastro | JML Musculação</title>
 </head>
 
-<body>
-	<div class="formulário">
-		<h1>Cadastro</h1>
+<body style="background-color: rgba(75, 209, 160, 0.1);">
+  <div class="formulário">
+    <h1>Cadastro</h1>
 
-		<div class="line">
-			<img src="images/icone_rosto.png" alt="Representação de um rosto" />
-		</div>
+    <div class="line">
+      <img src="images/icone_rosto.png" alt="Representação de um rosto" />
+    </div>
 
-		<form action="index.html" method="POST">
-			<section class="personal-info">
-				<img onclick="location.href='#names'" src="images/icone rosto input.png" alt="Face_icon" />
-				<input type="text" class="names" placeholder="Nome de Usuário" id="names" name="names" minlength="5"
-					required />
-			</section>
+    <form action="index.html" method="POST">
+      <!-- <section class="personal-info">
+        <img onclick="location.href='#names'" src="images/icone rosto input.png" alt="Face_icon" />
+        <input type="text" class="names" placeholder="Nome de Usuário" id="names" name="names" minlength="5" required />
+      </section> -->
 
-			<section class="personal-info">
-				<img onclick="location.href='#e-mail'" src="images/icon_gmail.png" alt="Mail_item" />
-				<input type="email" class="names" name="e-mail" id="e-mail" placeholder="Email" required />
-			</section>
+      <section class="personal-info">
+        <img onclick="location.href='#e-mail'" src="images/icon_gmail.png" alt="Mail_item" />
+        <input type="email" class="names" name="e-mail" id="inputEmail2" placeholder="Email" required />
+      </section>
 
-			<section class="personal-info">
-				<img onclick="location.href='#passw'" src="images/icone_cadeado.png" alt="Lock_icon" />
-				<input type="password" class="names" name="passw" id="passw" placeholder="Senha" minlength="8"
-					required />
-			</section>
-			<input type="submit" value="Inscrever-se" id="send" />
-		</form>
+      <section class="personal-info">
+        <img onclick="location.href='#passw'" src="images/icone_cadeado.png" alt="Lock_icon" />
+        <input type="password" class="names" name="passw" id="inputPassword2" placeholder="Senha" minlength="8" required />
+      </section>
+    </form>
+    <button type="submit" value="Inscrever-se" id="send2">Inscrever-se</button>
 
-		<div class="inscrito">
-			<span>Já cadastrado? Faça <a href="login.html">Login</a></span>
-		</div>
-	</div>
+    <div class="inscrito">
+      <span>Já cadastrado? Faça <a href="login.html">Login</a></span>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+
+	<script src="app.js"></script>
+	<script src="user.js"></script>
 </body>
 
 </html>
