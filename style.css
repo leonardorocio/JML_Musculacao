@@ -87,8 +87,13 @@ li a {
     margin-left: 10px;
 }
 
-#btn-instagram {
+#btn-instagram  {
     background: linear-gradient(to right, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
+}
+
+#btn-instagram a {
+    text-decoration: none;
+    color: white;
 }
 
 #btn-twitter {
@@ -359,6 +364,8 @@ abbr {
     font-size: large;
     max-width: 30em;
     max-height: 40em;
+    z-index: 2;
+    position: absolute;
 }
 
 form {
@@ -401,8 +408,13 @@ input:focus {
     cursor: pointer;
 }
 
+.personal-info:hover {
+    box-shadow: 1px 1px 10px grey;
+}
 
 #send, #send2 {
+    position: relative;
+    bottom: 14em;
     margin-top: 15px;
     width: 30%;
     padding: 20px 10px;
@@ -410,6 +422,15 @@ input:focus {
     border: 2px solid white;
     border-radius: 20px;
     cursor: pointer;
+}
+
+#send:focus, #send2:focus {
+    outline: none;
+}
+
+#send:hover, #send2:hover {
+    border: 1px solid grey;
+    box-shadow: 1px 1px 10px grey;
 }
 
 .line {
@@ -432,4 +453,16 @@ input:focus {
 .inscrito a {
     text-decoration: none;
     color: #333333;
+}
+
+.login-back {
+    margin: 0;
+    padding: 0;
+    background-image: url('images/header.jpg');
+    background-size: cover;
+    height: 100vh;
+
+    filter: blur(4px);
+    -webkit-filter: blur(8px);
+
 }
