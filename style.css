@@ -466,15 +466,6 @@ input:focus {
 
 }
 
-.carousel-inner .item {
-    opacity: 0;
-    transition: none;
-    transform: translate3d(0,0,0) !important;
-    height: auto;
-}
-  
-.carousel-inner .active {
-    transition: opacity 1s ease-in-out, height 1s;
-    opacity: 1;
-    height: auto;
+.carousel-item {
+    transition: transform 2s ease, opacity .5s ease-out;
 }
