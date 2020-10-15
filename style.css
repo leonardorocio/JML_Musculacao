@@ -196,7 +196,7 @@ li a {
     transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.active4, .dot:hover {
     background-color: #717171;
 }
 
@@ -464,4 +464,17 @@ input:focus {
     filter: blur(4px);
     -webkit-filter: blur(4px);
 
+}
+
+.carousel-inner .item {
+    opacity: 0;
+    transition: none;
+    transform: translate3d(0,0,0) !important;
+    height: auto;
+}
+  
+.carousel-inner .active {
+    transition: opacity 1s ease-in-out, height 1s;
+    opacity: 1;
+    height: auto;
 }
