@@ -26,17 +26,9 @@
     color: #4bd1a0;
 }
 
-#beneficios {
+#beneficios, #beneficios > * {
     background-color: #4bd1a0;
-}
-
-#titulo-beneficios {
-    font-size: 1.7vw;
-}
-
-#text-beneficios {
-    font-size: 1.7vw;
-    line-height: 1.2;
+    font-size: 1.8vw;
 }
 
 #lista-beneficios li {
@@ -54,20 +46,17 @@
 }
 
 #suplemento {
-    background-image: url(./images/suplementacao.jpg);
-    height: 30rem;
-    background-size: 100%;
+    background-image: url(./images/suplementacao.jpg);   
 }
 
 #dieta {
     background-image: url(./images/dieta.jpg);
-    height: 30rem;
-    background-repeat: no-repeat;
-    background-size: 100%;
 }
 
 .alimentacao {
     background-color: black;
+    height: 30rem;
+    background-size: 100%;
 }
 
 #dietas p {
