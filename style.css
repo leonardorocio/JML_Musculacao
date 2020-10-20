@@ -6,7 +6,7 @@
 }
 
 .nav-item {
-    font-size: 20px;
+    font-size: 1.4rem;
 }
 
 #imageLogo {
@@ -14,7 +14,7 @@
 }
 
 #botaoInscricao {
-    font-size: 20px;
+    font-size: 1.4rem;
     background-color: #4bd1a0;
     color: white;
     border-color: #4bd1a0;
@@ -37,7 +37,7 @@
 
 #lista-beneficios li {
     background-color: #4bd1a0;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border: 0;
     text-align: justify;
     margin-left: 12rem;
