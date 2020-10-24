@@ -80,3 +80,15 @@
     background-color: transparent;
     border-color: #4bd1a0;
 }
+
+#fundoCadastro {
+    background-color: #4bd1a0;
+}
+
+.forms {
+    position: relative;
+    top: 15vh;
+    height: 70vh;
+    width: 30vw;
+    border-radius: 1.5vw;
+}

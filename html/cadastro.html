@@ -1,52 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton:200,300,400,600" />
   <title>Cadastro | JML Musculação</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
-<body style="background-color: black;">
-  <main class = "login-back"></main>
-  <div class="formulário">
-    <h1>Cadastro</h1>
+<body id="fundoCadastro">
+  <div class="container bg-white d-flex flex-column forms">
+    <h1 class="display-4 text-center mb-3">Cadastro</h1>
 
-    <div class="line">
-      <img src="images/icone_rosto.png" alt="Representação de um rosto" />
-    </div>
+    <form action="../index.html" method="POST">
+      <div class="form-group">
+        <label for="nomeCompleto">Nome Completo: </label>
+        <input type="text" name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Ex: Josué Hass"
+          aria-describedby="helpId">
+      </div>
 
-    <form action="index.html" method="POST">
-      <!-- <section class="personal-info">
-        <img onclick="location.href='#names'" src="images/icone rosto input.png" alt="Face_icon" />
-        <input type="text" class="names" placeholder="Nome de Usuário" id="names" name="names" minlength="5" required />
-      </section> -->
+      <div class="form-group">
+        <label for="userEmail">Email: </label>
+        <input type="email" name="userEmail" id="userEmail" class="form-control"
+          placeholder="Ex: leonardof.rocio@gmail.com" aria-describedby="helpId">
+      </div>
+      <div class="form-group">
+        <label for="userPass">Senha: </label>
+        <input type="password" name="userPass" id="userPass" class="form-control" placeholder="*********"
+          aria-describedby="helpId">
+      </div>
 
-      <section class="personal-info">
-        <img onclick="location.href='#e-mail'" src="images/icon_gmail.png" alt="Mail_item" />
-        <input type="email" class="names" name="e-mail" id="inputEmail2" placeholder="Email" required />
-      </section>
+      <button class="btn btn-primary btn-block mt-5 rounded-pill" type="submit">Cadastrar</button>
 
-      <section class="personal-info">
-        <img onclick="location.href='#passw'" src="images/icone_cadeado.png" alt="Lock_icon" />
-        <input type="password" class="names" name="passw" id="inputPassword2" placeholder="Senha" minlength="8" required />
-      </section>
+      <div class="form-group">
+        <p class="text-center">Já possui uma conta? Faça <a href="../html/login.html">Login</a></p>
+      </div>
+
     </form>
-    <button type="submit" value="Inscrever-se" id="send2">Inscrever-se</button>
 
-    <div class="inscrito">
-      <span>Já cadastrado? Faça <a href="login.html">Login</a></span>
-    </div>
+  </div>
   </div>
 
-  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
 
-	<script src="app.js"></script>
-	<script src="user.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/autenticacao.js"></script>
 </body>
 
 </html>
