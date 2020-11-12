@@ -1,9 +1,9 @@
 function login() {
   if (firebase.auth().currentUser) {
-    firebase.auth().signOut()
+    firebase.auth().signOut();
   }
-  const email = document.getElementById("userEmail").value
-  const password = document.getElementById("userPass").value
+  const email = document.getElementById("userEmail").value;
+  const password = document.getElementById("userPass").value;
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
@@ -14,7 +14,7 @@ function login() {
       }).then(() => {
         setTimeout(() => {
           window.location.replace("../index.html")
-        }, 1000)
+        }, 1000);
       })
     })
     .catch(error => {
@@ -69,7 +69,7 @@ function signUp() {
         title: "Usuário criado com sucesso"
       }).then(() => {
         setTimeout(() => {
-          window.location.replace("./index.html")
+          window.location.replace("../index.html")
         }, 1000)
       })
     })
@@ -89,8 +89,4 @@ function signUp() {
           })
       }
     })
-}
-
-function logout() {
-  firebase.auth().signOut()
 }

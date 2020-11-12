@@ -6,26 +6,29 @@ function getUser() {
       currentUser.uid = user.uid
       let userLabel = document.getElementById('botaoInscricao')
       userLabel.innerHTML = user.email
+      userLabel.setAttribute('onclick', "location.href='./html/perfil.html'")
       createNewNavButton()
       let logOutButton = document.getElementById('logOutBtn')
       logOutButton.appendChild(createLogOutButton())
     } else {
-      swal.fire({
-        icon: "warning",
-        title: "Usuario não está logado",
-        text: "Deseja logar em um usuário?",
-        showCancelButton: true,
-        cancelButtonText: "Não",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sim",
-        confirmButtonColor: "#3085d6",
-      }).then((result) => {
-        if (result.value) {
-          setTimeout(() => {
-            window.location.replace('./html/login.html')
-          })
-        }
-      })
+      setTimeout(() => {
+        swal.fire({
+          icon: "warning",
+          title: "Usuario não está logado",
+          text: "Deseja logar em um usuário?",
+          showCancelButton: true,
+          cancelButtonText: "Não",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sim",
+          confirmButtonColor: "#3085d6",
+        }).then((result) => {
+          if (result.value) {
+            setTimeout(() => {
+              window.location.replace('./html/login.html')
+            }, 1000)
+          }
+        })
+      }, 500)
     }
   })
 }
