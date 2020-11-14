@@ -99,3 +99,16 @@
     height: 90vh;
     border-radius: 1.5vw;
 }
+
+#faceIcon {
+    border-radius: 50%;
+    height: 22.5vh;
+    width: 22.5vh;
+    cursor: pointer;
+}
+
+#faceInput 
+{
+    display: none;
+}
+

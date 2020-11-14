@@ -8,69 +8,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://unpkg.com/sweetalert2@9/dist/sweetalert2.all.js"></script>
   <link rel="stylesheet" href="../style.css">
 </head>
 
 <body id="fundoCadastro">
   <div class="container bg-white profiles">
-    <h1 class="display-4 mb-1 ml-4 text-center">Meu Perfil</h1>
+    <h2 class="display-4 text-center" id="meuPerfil">Meu Perfil</h2>
 
     <div class="container-fluid d-flex align-items-center flex-column">
-      <img src="../images/icone_rosto.png" alt="Icone Rosto" height="150" width="150" id='faceIcon'>
-      <form>
-        <div class="form-group">
-          <label for="exampleFormControlFile1" class="text-center">Insira uma foto</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
-        </div>
-      </form>
+      <img src="../images/icone_rosto.png" alt="Icone Rosto" id='faceIcon'>
+      <div class="form-group d-flex align-items-center flex-column">
+        <label for="faceInput" class="" id="userInfo">Perfil</label>
+        <input type="file" class="form-control-file form-control-sm" id="faceInput">
+      </div>
     </div>
 
+    <!-- <h6 class="display-4 text-justify" id="userInfo">Perfil</h6> -->
     <form action="">
 
-      <div class="form-group row">
-        <label for="firstName" class="col-sm-2 col-form-label">Nome:</label>
+      <div class="form-group row mb-2">
+        <label for="firstName" class="col-sm-2">Nome:</label>
         <div class="col-sm-10">
-          <input placeholder="Ex: Luís" type="text" class='form-control' id="firstName">
+          <input placeholder="Ex: Luís" type="text" class='form-control form-control-sm' id="firstName">
         </div>
       </div>
-      <div class="form-group row">
-        <label for="lastName" class="col-sm-2 col-form-label">Sobrenome:</label>
+      <div class="form-group row mb-2">
+        <label for="lastName" class="col-sm-2">Sobrenome:</label>
         <div class="col-sm-10">
-          <input placeholder="Ex: Henrique" type="text" class='form-control' id="lastName">
+          <input placeholder="Ex: Henrique" type="text" class='form-control form-control-sm' id="lastName">
         </div>
       </div>
-      <div class="form-group row">
-        <label for="age" class="col-sm-2 col-form-label">Idade:</label>
+      <div class="form-group row mb-2">
+        <label for="age" class="col-sm-2">Idade:</label>
         <div class="col-sm-10">
-          <input placeholder="Ex: 25" type="text" class='form-control' id="age">
+          <input placeholder="Ex: 25" type="text" class='form-control form-control-sm' id="age">
         </div>
       </div>
-      <div class="form-group row">
-        <label for="altura" class="col-sm-2 col-form-label">Altura (em Metros):</label>
+      <div class="form-group row mb-2">
+        <label for="altura" class="col-sm-2">Altura (em Metros):</label>
         <div class="col-sm-10">
-          <input placeholder="Ex: 1.70" type="text" class='form-control' id="altura">
+          <input placeholder="Ex: 1.70" type="text" class='form-control form-control-sm' id="altura">
         </div>
       </div>
-      <div class="form-group row">
-        <label for="peso" class="col-sm-2 col-form-label">Peso (em KG):</label>
+      <div class="form-group row mb-2">
+        <label for="peso" class="col-sm-2">Peso (em KG):</label>
         <div class="col-sm-10">
-          <input placeholder="Ex: 65.5" type="text" class='form-control' id="peso">
+          <input placeholder="Ex: 65.5" type="text" class='form-control form-control-sm' id="peso">
         </div>
       </div>
       <div class="form-check form-check-inline">
         <label class="form-check-label mr-5" for="">Sexo Biológico: </label>
-        <input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="sexFeminino" value="option1">
+        <input class="form-check-input ml-5" type="radio" name="sexRadio" id="sexFeminino" value="woman">
         <label class="form-check-label" for="sexFeminino">Feminino</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexMasculino" value="option2">
+        <input class="form-check-input" type="radio" name="sexRadio" id="sexMasculino" value="man">
         <label class="form-check-label" for="sexMasculino">Masculino</label>
       </div>
       <div class="form-group"></div>
-      <button type='button' class="btn btn-primary mt-2" onclick="saveProfile()">Salvar Perfil</button>
+      <button type='button' class="btn btn-primary" onclick="uploadProfileImage()">Salvar Perfil</button>
     </form>
 
 
@@ -88,9 +88,31 @@
     <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
 
     <script src="../js/app.js"></script>
-    <script src="../js/user.js"></script>
+    <script src="../js/perfil.js"></script>
+    <script>
+      function readURL(input) {
+
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#faceIcon').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $("#faceIcon").click(function () {
+        $("#faceInput").trigger("click");
+        $("#faceInput").change(function () {
+          readURL(this);
+        });
+      });
+    </script>
+
 </body>
 
 </html>
