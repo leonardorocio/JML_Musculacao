@@ -5,7 +5,7 @@ function getUser() {
     if (user) {
       currentUser.uid = user.uid
       let userLabel = document.getElementById('botaoInscricao')
-      userLabel.innerHTML = user.email
+      userLabel.innerHTML = 'Meu Perfil'
       userLabel.setAttribute('onclick', "location.href='./html/perfil.html'")
       createNewNavButton()
       let logOutButton = document.getElementById('logOutBtn')

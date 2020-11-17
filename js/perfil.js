@@ -2,7 +2,6 @@ const storRef = firebase.storage().ref()
 const db = firebase.firestore()
 let currentUser = {}
 let profile = false
-let urlImg = ''
 
 function getUser() {
   firebase.auth().onAuthStateChanged((user) => {
@@ -38,8 +37,20 @@ function uploadProfileImage() {
       setTimeout(() => {
         saveProfile()
       }, 500)
-    }).catch(function () {
-      console.log('Estamos atualizando coisas fora a foto')
+    }).catch(function (error) {
+      const errorCode = error.code
+      switch (errorCode) {
+        case 'storage/unauthorized':
+          swal.fire({
+            icon: 'error',
+            title: 'Usuário não tem autorização para isso',
+          })
+        default:
+          swal.fire({
+            icon: 'error',
+            title: 'Erro desconhecido'
+          })
+      }
     })
     console.log(imagesRef.fullPath)
   } else if (document.getElementById('faceIcon').src != '../images/icone_rosto.png') {
@@ -62,7 +73,7 @@ function downloadTest() {
 
 function getDownloadLink() {
   storRef.child(downloadTest()).getDownloadURL().then(function (url) {
-    img = document.getElementById('faceIcon')
+    let img = document.getElementById('faceIcon')
     img.src = url
   }).catch(function (error) {
     console.log(error)
@@ -99,7 +110,6 @@ async function getUserInfo(uid) {
       document.getElementById('sexFeminino').checked = 'checked'
     }
     document.getElementById("faceIcon").src = currentUser.imgPath
-    document.getElementById("faceIcon").class = 'rounded'
 
   }
 }
@@ -147,7 +157,14 @@ async function saveProfile() {
     })
     console.log('Perfil salvo com sucesso')
   }
-  window.location.reload()
+  swal.fire({
+    icon: 'success',
+    title: 'Perfil salvo com sucesso',
+  }).then((result) => {
+    if (result.value) {
+      window.location.reload()
+    }
+  })
 }
 
 

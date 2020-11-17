@@ -102,13 +102,15 @@
 
 #faceIcon {
     border-radius: 50%;
-    height: 22.5vh;
-    width: 22.5vh;
+    height: 25vh;
+    width: 25vh;
     cursor: pointer;
 }
 
-#faceInput 
-{
+#faceInput {
     display: none;
 }
 
+.wid {
+    width: 10%;
+}
