@@ -63,4 +63,4 @@ env/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+Backend/backend/.env
