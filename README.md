@@ -11,7 +11,8 @@ Posteriormente será feito o deploy do projeto para a utilização do usuário, 
 ####### Para rodar o Backend localmente #######
 
 Primeiramente é necessário que o Python 3 esteja instalado na máquina (de preferência da versão 3.8 para cima) e que esteja configurado nas variáveis de ambiente.
-Python é encontrado em: https://www.python.org/downloads/. 
+Python é encontrado em: https://www.python.org/downloads/.
+
 Já para configurar variáveis de ambiente:
 
 Windows: https://medium.com/@victorromariopazdejesus/python-3-configurando-vari%C3%A1veis-de-ambiente-no-windows-10-63059c7192e6.
@@ -64,10 +65,15 @@ caminho/da/minha/pasta> vue create nome_projeto
 Para instalar corretamente o projeto, siga os passos a seguir:
 
 1°: Selecione a opção "Manually select features".
+
 2°: Desmarque as opção "Choose Vue version" e marque as opções "Router" e "CSS Pre-processors" (Linter/Formatter fica a critério, eu não utilizei).
+
 3°: Digite N e confirme.
+
 4°: Marque a opção 'Sass/SCSS (with node-sass)'
+
 5°: Marque a opção 'in package.json'.
+
 6°: Digite N e confirme.
 
 Com término da instalação do projeto, são necessários algumas bibliotecas para que o mesmo funcione adequadamente, então entraremos no diretório:
@@ -77,7 +83,9 @@ caminho/da/minha/pasta> cd nome_projeto
 Dentro da pasta do projeto podemos instalar algumas bibliotecas com os comandos:
 
 caminho/da/minha/pasta/nome_projeto> npm install bootstrap
+
 caminho/da/minha/pasta/nome_projeto> npm install axios
+
 caminho/da/minha/pasta/nome_projeto> npm install firebase
 
 O axios é o pacote que será utilizado para comunicação do backend com o frontend, o bootstrap será para os estilos e o firebase será para fins de armazenamento.
@@ -93,6 +101,7 @@ Ao final da compilação, visite a url mostrada, lembre-se de manter o server do
 Para esse projeto é isso,
 
 Atenciosamente, equipe do JML Musculação.
+
 Criadores: Josué Hass Pereira, Leonardo Fagundes Rócio, Luís Henrique Schmitt e Mateus Alayo Hidalgo Schulz.
 
 
