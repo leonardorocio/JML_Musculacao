@@ -20,7 +20,14 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 from backend.core.views import MyTokenObtainPairView 
 from rest_framework_simplejwt.views import TokenRefreshView
 
+from django.conf.urls.static import static
+
+
+from backend import settings
 from backend.core.router import router
+
+admin.autodiscover()
+admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +36,10 @@ urlpatterns = [
     path('api/docs/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('auths/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('summernote/', include('django_summernote.urls')),
     path('', include(router.urls), name='create-user'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

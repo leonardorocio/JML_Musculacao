@@ -3,7 +3,9 @@
     
     <span>{{ article.title}}</span>
     <br>
-    <span>{{ article.text}}</span>
+    <span id="summernote">
+      {{ article.text}}
+    </span>
     <br>
     <span>{{ article.category}}</span>
     <br>
@@ -38,6 +40,8 @@ export default {
       })
         .then((response) => {
           this.article = response.data;
+          console.log(this.article)
+          this.writeSummernote();
         })
         .catch((error) => {
           swal.fire({
@@ -48,7 +52,10 @@ export default {
     },
     getCurrentPage() {
       let page = window.location.pathname;
-      this.currentpage = page[page.length - 1];
+      this.currentpage = parseInt(page.split('/')[2])
+    },
+    writeSummernote() {
+      document.getElementById('summernote').innerHTML = `${this.article.text}`
     },
   },
 };
