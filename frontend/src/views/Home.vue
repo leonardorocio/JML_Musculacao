@@ -55,28 +55,29 @@
               <button
                 id="botaoInscricao"
                 class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
+                @click="logout()"
               >
-                <router-link :to="{ name: 'Home' }" id="auth-link">
-                  Sair
-                </router-link>
+                <a id="auth-link"> 
+                  Sair 
+                </a>
               </button>
             </li>
-          </ul >
-  <ul class="list-inline my-2 my-lg-0" id="auth" v-else>
-    <li class="list-inline-item">
-      <button
-        id="botaoInscricao"
-        class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
-      >
-        <router-link :to="{name: 'Cadastro' }" id="auth-link">
+          </ul>
+          <ul class="list-inline my-2 my-lg-0" id="auth" v-else>
+            <li class="list-inline-item">
+              <button
+                id="botaoInscricao"
+                class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
+              >
+                <router-link :to="{ name: 'Cadastro' }" id="auth-link">
                   Inscrição
                 </router-link>
               </button>
             </li>
-          </ul >
-        </div >
-      </nav >
-    </div >
+          </ul>
+        </div>
+      </nav>
+    </div>
 
     <div class="container-fluid mt-5 p-0 d-inline-flex">
       <img src="../assets/beneficios.jpg" alt="Barra fixa" width="50%" />
@@ -84,11 +85,11 @@
         <div class="card-body" id="beneficios">
           <p class="text-center font-weight-bold">BENEFÍCIOS DA MUSCULAÇÃO</p>
           <p class="card-text ml-5">
-          Sem dúvidas, a musculação é uma das mais benéficas atividades
-          físicas para melhorar massa óssea, diminuir percentual de gorduras
-          e, principalmente, recuperar a quantidade perdida de músculos, o que
-          acontece naturalmente com o avanço da idade. Entre os principais
-          benefícios, estão:
+            Sem dúvidas, a musculação é uma das mais benéficas atividades
+            físicas para melhorar massa óssea, diminuir percentual de gorduras
+            e, principalmente, recuperar a quantidade perdida de músculos, o que
+            acontece naturalmente com o avanço da idade. Entre os principais
+            benefícios, estão:
           </p>
           <ul class="list-group ml-4" id="lista-beneficios">
             <li class="list-group-item">Ganho de Massa Muscular;</li>
@@ -103,7 +104,7 @@
     </div>
 
     <h1 class="display-3 m-4 text-center" id="tituloCarrossel">
-    CONFIRA NOSSOS TREINOS!
+      CONFIRA NOSSOS TREINOS!
     </h1>
 
     <div
@@ -166,19 +167,19 @@
 
     <div class="container-fluid mt-5 p-0 d-inline-flex" id="dietas">
       <p class="mt-4 font-weight-bold w-100 text-center text-white">
-      QUER MELHORAR SUA ALIMENTAÇÃO?
+        QUER MELHORAR SUA ALIMENTAÇÃO?
       </p>
       <div class="col-6 m-0 p-0">
         <div class="card-body w-100 alimentacao" id="suplemento">
           <button class="btn btn-lg btn-block w-50 pt-3 pb-3 alimento">
-          Suplementação
+            Suplementação
           </button>
         </div>
       </div>
       <div class="col-6 m-0 p-0">
         <div class="card-body w-100 alimentacao" id="dieta">
           <button class="btn btn-lg btn-block w-50 pt-3 pb-3 alimento">
-          Alimentação
+            Alimentação
           </button>
         </div>
       </div>
@@ -187,17 +188,17 @@
     <div class="container-fluid mt-5 p-0 bg-dark d-flex justify-content-center">
       <span class="text-white">Copyright © 2021 - JML Musculação</span>
     </div>
-  </body >
+  </body>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
-      user_logged: null
-    }
+      user_logged: null,
+    };
   },
   mounted() {
     this.checkUserLogged();
@@ -206,39 +207,67 @@ export default {
     checkUserLogged() {
       let token = sessionStorage.access;
       axios({
-        method: 'GET',
-        url: 'http://localhost:8000/auths/get_user_checked',
+        method: "GET",
+        url: "http://localhost:8000/auths/get_user_checked",
         headers: {
-          Authorization: 'Bearer ' + token
-        }
+          Authorization: "Bearer " + token,
+        },
       })
-      .then((resp) => {
-        this.user_logged = true
+        .then((resp) => {
+          this.user_logged = true;
+        })
+        .catch((errors) => {
+          swal
+            .fire({
+              icon: "warning",
+              title: "Usuario não encontrado",
+              text: "Deseja criar um usuário?",
+              showCancelButton: true,
+              cancelButtonText: "Não",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Sim",
+              confirmButtonColor: "#3085d6",
+            })
+            .then((result) => {
+              if (result.value) {
+                this.$router.push({ name: "Cadastro" });
+              }
+            });
+          this.user_logged = false;
+          
+        });
+    },
+    logout() {
+      axios({
+        method: "POST",
+        url: "http://localhost:8000/auths/logout/",
+        data: {
+          refresh_token: sessionStorage.refresh,
+        },
       })
-      .catch((errors) => {
-        swal
-          .fire({
-            icon: 'warning',
-            title: "Usuario não encontrado",
-            text: "Deseja criar um usuário?",
-            showCancelButton: true,
-            cancelButtonText: "Não",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Sim",
-            confirmButtonColor: "#3085d6",
-          }).then((result) => {
-            if (result.value) {this.$router.push({name : 'Cadastro'})}
-          })
-        this.user_logged = false;
-      })
-    }
-  }
-}
-
+        .then((response) => {
+          sessionStorage.clear();
+          swal
+            .fire({
+              icon: "success",
+              title: "Usuário foi desconectado",
+            })
+            .then((result) => {
+              window.location.reload();
+            });
+        })
+        .catch((errors) => {
+          swal.fire({
+            icon: "error",
+            title: "Ocorreu um erro ao desconectar o usuário",
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
 
 <style>

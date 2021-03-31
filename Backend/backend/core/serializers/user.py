@@ -51,3 +51,11 @@ class GetTokenSerializer(serializers.ModelSerializer):
         fields = ['token']
 
 
+class LogoutSerializer(serializers.ModelSerializer):
+    refresh_token = serializers.CharField()
+
+    class Meta:
+        model = User
+        fields = ['refresh_token']
+
+

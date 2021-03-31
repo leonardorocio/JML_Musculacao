@@ -1,17 +1,15 @@
 <template>
-<body>
-    
-    <span>{{ article.title}}</span>
-    <br>
+  <body>
+    <span>{{ article.title }}</span>
+    <br />
     <span id="summernote">
-      {{ article.text}}
+      {{ article.text }}
     </span>
-    <br>
-    <span>{{ article.category}}</span>
-    <br>
-    <span>{{ article.id}}</span>
-
-</body>
+    <br />
+    <span>{{ article.category }}</span>
+    <br />
+    <span>{{ article.id }}</span>
+  </body>
 </template>
 
 <script>
@@ -40,7 +38,6 @@ export default {
       })
         .then((response) => {
           this.article = response.data;
-          console.log(this.article)
           this.writeSummernote();
         })
         .catch((error) => {
@@ -52,10 +49,10 @@ export default {
     },
     getCurrentPage() {
       let page = window.location.pathname;
-      this.currentpage = parseInt(page.split('/')[2])
+      this.currentpage = parseInt(page.split("/")[2]);
     },
     writeSummernote() {
-      document.getElementById('summernote').innerHTML = `${this.article.text}`
+      document.getElementById("summernote").innerHTML = `${this.article.text}`;
     },
   },
 };

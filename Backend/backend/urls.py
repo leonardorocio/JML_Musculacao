@@ -17,8 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from backend.core.views import MyTokenObtainPairView 
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 
 from django.conf.urls.static import static
 
@@ -34,8 +33,8 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/docs/redoc/', SpectacularRedocView.as_view(), name='redoc'),
     path('api/docs/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('auths/login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auths/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auths/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('summernote/', include('django_summernote.urls')),
     path('', include(router.urls), name='create-user'),
 ]

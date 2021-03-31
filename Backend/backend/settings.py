@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'backend.core',
     'corsheaders',
-    'django_summernote'
+    'django_summernote',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
