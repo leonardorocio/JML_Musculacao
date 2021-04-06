@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 from datetime import timedelta
 import os
 from decouple import config
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -150,3 +151,5 @@ SIMPLE_JWT = {
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+django_heroku.settings(locals())

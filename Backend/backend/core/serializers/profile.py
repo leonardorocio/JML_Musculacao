@@ -7,7 +7,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     owner_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     def create(self, validated_data):
-        print(validated_data)
         prof = Profile.objects.create(
         first_name=validated_data['first_name'],
         last_name=validated_data['last_name'],

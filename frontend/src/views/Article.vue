@@ -28,24 +28,23 @@ export default {
     this.getArticle();
   },
   methods: {
-    getArticle() {
-      axios({
-        method: "get",
-        url: `http://localhost:8000/articles/${this.currentpage}`,
-        headers: {
-          Authorization: "Bearer " + this.token,
-        },
-      })
-        .then((response) => {
-          this.article = response.data;
-          this.writeSummernote();
-        })
-        .catch((error) => {
-          swal.fire({
-            icon: "error",
-            title: `Ocorreu um erro ${error}`,
-          });
+    async getArticle() {
+      try {
+        let response = await axios({
+          method: "get",
+          url: `https://jml-musculacao-admin.herokuapp.com/articles/${this.currentpage}`,
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
         });
+        this.article = response.data;
+        this.writeSummernote();
+      } catch (e) {
+        swal.fire({
+          icon: "error",
+          title: `Ocorreu um erro ${e}`,
+        });
+      }
     },
     getCurrentPage() {
       let page = window.location.pathname;

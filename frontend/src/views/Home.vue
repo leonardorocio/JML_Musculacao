@@ -197,27 +197,26 @@ import axios from "axios";
 export default {
   data() {
     return {
-      user_logged: null,
+      user_logged: false,
     };
   },
   mounted() {
     this.checkUserLogged();
   },
   methods: {
-    checkUserLogged() {
+    async checkUserLogged() {
       let token = sessionStorage.access;
-      axios({
-        method: "GET",
-        url: "http://localhost:8000/auths/get_user_checked",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-        .then((resp) => {
-          this.user_logged = true;
+      try {
+        let response = await axios({
+          method: 'GET',
+          url: "https://jml-musculacao-admin.herokuapp.com/auths/get_user_checked",
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         })
-        .catch((errors) => {
-          swal
+        this.user_logged = true
+      } catch(e) {
+        swal
             .fire({
               icon: "warning",
               title: "Usuario não encontrado",
@@ -233,35 +232,32 @@ export default {
                 this.$router.push({ name: "Cadastro" });
               }
             });
-          this.user_logged = false;
-          
-        });
+      }
     },
-    logout() {
-      axios({
-        method: "POST",
-        url: "http://localhost:8000/auths/logout/",
-        data: {
-          refresh_token: sessionStorage.refresh,
-        },
-      })
-        .then((response) => {
-          sessionStorage.clear();
-          swal
-            .fire({
-              icon: "success",
-              title: "Usuário foi desconectado",
-            })
-            .then((result) => {
-              window.location.reload();
-            });
+    async logout() {
+      try {
+        let response = await axios({
+          method: 'POST',
+          url: 'https:/jml-musculacao-admin.herokuapp.com/auths/logout/',
+          data: {
+            refresh_token: sessionStorage.refresh,
+          }
         })
-        .catch((errors) => {
-          swal.fire({
-            icon: "error",
-            title: "Ocorreu um erro ao desconectar o usuário",
-          });
-        });
+        sessionStorage.clear();
+        swal
+          .fire({
+            icon: "success",
+            title: "Usuário foi desconectado"
+          }).then((result) => {
+            window.location.reload();
+          })
+      } catch(e) {
+        swal
+          .fire({
+            icon: 'error',
+            title: 'Ocorreu um erro ao desconectar o usuário'
+          })
+      }
     },
   },
 };

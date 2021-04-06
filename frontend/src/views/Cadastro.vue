@@ -56,35 +56,32 @@ export default {
     };
   },
   methods: {
-    signUp() {
+    async signUp() {
       this.email = document.getElementById("userEmail").value;
       this.pass = document.getElementById("userPass").value;
-      axios({
-        method: "post",
-        url: "http://127.0.0.1:8000/auths/",
-        data: {
-          email: this.email,
-          password: this.pass,
-        },
-      })
-        .then((response) => {
-          let data = response.data
-          swal
-            .fire({
-              icon: "success",
-              title: "Usuário criado com sucesso",
-            })
-            .then(() => {
-              this.$router.push({ name: "Login" });
-            });
-        })
-        .catch((errors) => {
-          swal
-            .fire({
-							icon: 'error',
-							title: `Ocorreu um erro ${errors}`
-						});
+      try {
+        let response = await axios({
+          method: "POST",
+          url: "https://jml-musculacao-admin.herokuapp.com/auths/",
+          data: {
+            email: this.email,
+            password: this.pass,
+          },
         });
+        swal
+          .fire({
+            icon: "success",
+            title: "Usuário criado com sucesso",
+          })
+          .then(() => {
+            this.$router.push({ name: "Login" });
+          });
+      } catch (e) {
+        swal.fire({
+          icon: "error",
+          title: `Ocorreu um erro ${errors}`,
+        });
+      }
     },
   },
 };

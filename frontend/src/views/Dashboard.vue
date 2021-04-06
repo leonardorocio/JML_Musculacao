@@ -143,11 +143,17 @@ export default {
       toUploadImage: "",
     };
   },
-  mounted() {
-    this.getProfileId();
-    setTimeout(() => {
-      this.getUserProfile();
-    }, 100);
+  async mounted() {
+    try {
+      await this.getProfileId();
+    } catch(e) {
+      swal
+        .fire({
+          icon: 'error',
+          title: `Erro ${e}`
+        })
+    }
+    this.getUserProfile();
   },
 
   methods: {
@@ -196,75 +202,74 @@ export default {
         reader.readAsDataURL(files[0]);
       }
     },
-    getProfileId() {
-      axios({
-        method: "POST",
-        url: "http://localhost:8000/profiles/get_profile_id/",
-        data: {
-          owner_id: parseInt(this.owner_id),
-        },
-        headers: {
-          Authorization: "Bearer " + this.token,
-        },
-      })
-        .then((resp) => {
-          this.profileId = resp.data;
-        })
-        .catch((error) => {
+    async getProfileId() {
+      try {
+        let response = await axios({
+          method: "POST",
+          url:
+            "https://jml-musculacao-admin.herokuapp.com/profiles/get_profile_id/",
+          data: {
+            owner_id: parseInt(this.owner_id),
+          },
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+        this.profileId = response.data;
+      } catch (e) {
+        swal.fire({
+          icon: "error",
+          title: "Não foi possível achar o identificar do perfil",
+        });
+      }
+    },
+
+    async getUserProfile() {
+      try {
+        let response = await axios({
+          method: "GET",
+          url: `https://jml-musculacao-admin.herokuapp.com/profiles/${parseInt(
+            this.profileId
+          )}/`,
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        });
+        let resp = response.data;
+        if (
+          resp.first_name ||
+          resp.last_name ||
+          resp.age ||
+          resp.height ||
+          resp.weight ||
+          resp.biosex ||
+          resp.image
+        ) {
+          this.first_name = resp.first_name;
+          this.last_name = resp.last_name;
+          this.age = resp.age;
+          this.height = resp.height;
+          this.weight = resp.weight;
+          this.biosex = resp.biosex;
+          this.profileImage = resp.image;
+          this.saveMethod = "PUT";
+        } else {
+          this.saveMethod = "POST";
+        }
+      } catch (e) {
+        if (e.response.status == 404) {
+          document.getElementById("userInfo").innerHTML += "não registrado";
+          this.saveMethod = "POST";
+        } else {
           swal.fire({
             icon: "error",
-            title: "Não foi possível achar o identificador do perfil",
+            title: `Erro ${e}`,
           });
-        });
+        }
+      }
     },
 
-    getUserProfile() {
-      setTimeout(() => {
-        axios({
-          method: "GET",
-          url: `http://localhost:8000/profiles/${parseInt(this.profileId)}/`,
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-        })
-          .then((response) => {
-            let resp = response.data;
-            if (
-              resp.first_name ||
-              resp.last_name ||
-              resp.age ||
-              resp.height ||
-              resp.weight ||
-              resp.biosex ||
-              resp.image
-            ) {
-              this.first_name = resp.first_name;
-              this.last_name = resp.last_name;
-              this.age = resp.age;
-              this.height = resp.height;
-              this.weight = resp.weight;
-              this.biosex = resp.biosex;
-              this.profileImage = resp.image;
-              this.saveMethod = "PUT";
-            } else {
-              this.saveMethod = "POST";
-            }
-          })
-          .catch((error) => {
-            if (error.response.status == 404) {
-              console.log("Esse ainda não tem informações");
-            } else {
-              swal.fire({
-                icon: "error",
-                title: `Erro: ${error}`,
-              });
-            }
-            this.saveMethod = "POST";
-          });
-      }, 5);
-    },
-
-    saveProfile(filepath) {
+    async saveProfile(filepath) {
       this.first_name = document.getElementById("firstName").value;
       this.last_name = document.getElementById("lastName").value;
       this.age = document.getElementById("age").value;
@@ -275,75 +280,73 @@ export default {
       this.biosex = manRadio.checked ? manRadio.value : womanRadio.value;
 
       if (this.saveMethod == "POST") {
-        axios({
-          method: "POST",
-          url: "http://localhost:8000/profiles/",
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-          data: {
-            owner_id: parseInt(this.owner_id),
-            first_name: this.first_name,
-            last_name: this.last_name,
-            age: this.age,
-            height: this.height,
-            weight: this.weight,
-            biosex: this.biosex,
-            image: filepath,
-          },
-        })
-          .then((response) => {
-            swal
-              .fire({
-                icon: "success",
-                title: `Usuário cadastrado com sucesso`,
-              })
-              .then((result) => {
-                window.location.reload();
-              });
-          })
-          .catch((error) => {
-            swal.fire({
-              icon: "error",
-              title: `Não foi possível cadastrar usuário. Erro: ${error}`,
-            });
+        try {
+          let response = await axios({
+            method: "POST",
+            url: "https://jml-musculacao-admin.herokuapp.com/profiles/",
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+            data: {
+              owner_id: parseInt(this.owner_id),
+              first_name: this.first_name,
+              last_name: this.last_name,
+              age: this.age,
+              height: this.height,
+              weight: this.weight,
+              biosex: this.biosex,
+              image: filepath,
+            },
           });
+          swal
+            .fire({
+              icon: "success",
+              title: `Usuário cadastrado com sucesso`,
+            })
+            .then((result) => {
+              window.location.reload();
+            });
+        } catch (e) {
+          swal.fire({
+            icon: "error",
+            title: `Não foi possível cadastrar usuário. Erro: ${e}`,
+          });
+        }
       } else {
-        axios({
-          method: "PUT",
-          url: `http://localhost:8000/profiles/${parseInt(this.profileId)}/`,
-          headers: {
-            Authorization: "Bearer " + this.token,
-          },
-          data: {
-            owner_id: this.owner_id,
-            first_name: this.first_name,
-            last_name: this.last_name,
-            age: this.age,
-            height: this.height,
-            weight: this.weight,
-            biosex: this.biosex,
-            image: filepath,
-          },
-        })
-          .then((response) => {
-            swal
-              .fire({
-                icon: "success",
-                title: `Usuário atualizado com sucesso`,
-              })
-              .then((result) => {
-                window.location.reload();
-              });
-          })
-          .catch((errors) => {
-            console.log(errors.request);
-            console.log(errors.response);
-            swal.fire({
-              icon: "error",
-              title: `Não foi possível atualizar usuário. Erro: ${errors}`,
-            });
+        try {
+          let response = await axios({
+            method: "PUT",
+            url: `https://jml-musculacao-admin.herokuapp.com/profiles/${parseInt(
+              this.profileId
+            )}/`,
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+            data: {
+              owner_id: this.owner_id,
+              first_name: this.first_name,
+              last_name: this.last_name,
+              age: this.age,
+              height: this.height,
+              weight: this.weight,
+              biosex: this.biosex,
+              image: filepath,
+            },
           });
+          swal
+            .fire({
+              icon: "success",
+              title: `Usuário atualizado com sucesso`,
+            })
+            .then((result) => {
+              window.location.reload();
+            });
+        } catch (e) {
+          swal.fire({
+            icon: "error",
+            title: `Não foi possível atualizar usuário. Erro: ${e}`,
+          });
+        }
       }
     },
   },

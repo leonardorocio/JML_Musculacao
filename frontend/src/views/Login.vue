@@ -56,27 +56,27 @@ export default {
     };
   },
   methods: {
-    login() {
+    async login() {
       this.email = document.getElementById("userEmail").value;
       this.pass = document.getElementById("userPass").value;
-      axios({
-        method: "post",
-        url: "http://localhost:8000/auths/login/",
-        data: {
-          email: this.email,
-          password: this.pass,
-        },
-      })
-        .then((response) => {
-          let access_token = response.data["access"];
-          let refresh_token = response.data["refresh"];
-          sessionStorage.setItem("access", access_token);
-          sessionStorage.setItem("refresh", refresh_token);
-          axios({
+      try {
+        let response = await axios({
+          method: 'POST',
+          url: 'https://jml-musculacao-admin.herokuapp.com/auths/login/',
+          data: {
+            email: this.email,
+            password: this.pass
+          },
+        })
+        let access_token = response.data['access'];
+        let refresh_token = response.data['refresh'];
+        sessionStorage.setItem("access", access_token);
+        sessionStorage.setItem("refresh", refresh_token);
+        axios({
             method: "GET",
-            url: "http://localhost:8000/auths/",
+            url: "https://jml-musculacao-admin.herokuapp.com/auths/",
             headers: {
-              Authorization: "Bearer " + access_token,
+              Authorization: `Bearer ${access_token}`
             },
           }).then((resp) => {
             const response = resp.data;
@@ -95,13 +95,12 @@ export default {
             .then(() => {
               this.$router.push({ name: "Home" });
             });
-        })
-        .catch((errors) => {
-          swal.fire({
+      } catch (e) {
+        swal.fire({
             icon: "error",
-            title: `Ocorreu um erro ${errors}`,
+            title: `Ocorreu um erro ${e}`,
           });
-        });
+      }
     },
   },
 };
