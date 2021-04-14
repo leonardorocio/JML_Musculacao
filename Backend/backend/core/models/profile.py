@@ -19,3 +19,6 @@ class Profile(models.Model):
         choices=bio_sex, max_length=101, blank=True, null=True)
     image = models.TextField(blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        return super().save(*args, **kwargs)
+
