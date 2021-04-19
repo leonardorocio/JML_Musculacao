@@ -4,6 +4,7 @@ from django.core import exceptions
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     token = serializers.SerializerMethodField()
@@ -17,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         return token
 
     def validate(self, data):
-        # Falta validar outras informações, talvez separe o profile do user em si
+        # Falta validar outras informações
         password = data.get('password')
         errors = dict()
         try:
@@ -43,13 +44,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'email', 'password', 'token']
 
-class GetTokenSerializer(serializers.ModelSerializer):
-    token = serializers.CharField()
-
-    class Meta:
-        model = User
-        fields = ['token']
-
 
 class LogoutSerializer(serializers.ModelSerializer):
     refresh_token = serializers.CharField()
@@ -57,5 +51,3 @@ class LogoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['refresh_token']
-
-

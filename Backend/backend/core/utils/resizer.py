@@ -1,7 +1,7 @@
-from os import path
 from PIL import Image
 from django.conf import settings
 import os
+
 
 def resize_image(path, max_width=800):
     try:
@@ -26,6 +26,6 @@ def resize_image(path, max_width=800):
         quality=50
     )
     print('Redimensionamento feito com sucesso')
-    print(f'A imagem tinha {width}x{height} e agora tem {max_width}x{new_height}')
+    print(
+        f'A imagem tinha {width}x{height}, agora tem {max_width}x{new_height}')
     pil.close()
-

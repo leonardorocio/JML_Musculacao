@@ -1,5 +1,7 @@
 from rest_framework import viewsets
-from backend.core.serializers.profile import Profile, ProfileSerializer, GetProfileIdSerializer
+from backend.core.serializers import ProfileSerializer
+from backend.core.serializers.profile import GetProfileIdSerializer
+from backend.core.models import Profile
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -24,6 +26,8 @@ class ProfileViewSet(viewsets.ModelViewSet):
             id = Profile.objects.get(owner_id=owner_id)
             if id is not None:
                 serialized = ProfileSerializer(id)
-                return Response(data=serialized.data['id'], content_type='application/json')
+                return Response(data=serialized.data['id'],
+                                content_type='application/json')
         except Exception as e:
-            return Response({'msg': f'Ocorreu um erro: {e}'}, content_type='application/json')
+            return Response({'msg': f'Ocorreu um erro: {e}'},
+                            content_type='application/json')

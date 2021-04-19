@@ -77,9 +77,17 @@ export default {
             this.$router.push({ name: "Login" });
           });
       } catch (e) {
+        var errorCode = "";
+        for (let err in e.response.data) {
+          errorCode += e.response.data[`${err}`][0];
+        }
+        errorCode = errorCode.charAt(0).toUpperCase() + errorCode.substring(1)
         swal.fire({
           icon: "error",
-          title: `Ocorreu um erro ${errors}`,
+          title: `Erro: ${errorCode}`,
+        }).then(() => {
+          document.getElementById("userEmail").value = "";
+          document.getElementById("userPass").value = "";
         });
       }
     },

@@ -57,9 +57,7 @@
                 class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
                 @click="logout()"
               >
-                <a id="auth-link"> 
-                  Sair 
-                </a>
+                <a id="auth-link"> Sair </a>
               </button>
             </li>
           </ul>
@@ -107,62 +105,45 @@
       CONFIRA NOSSOS TREINOS!
     </h1>
 
-    <div
-      id="carouselExampleIndicators"
-      class="carousel slide carousel-fade"
-      data-ride="carousel"
-      data-interval="5000"
-    >
-      <ol class="carousel-indicators">
-        <li
-          data-target="#carouselExampleIndicators"
-          data-slide-to="0"
-          class="active"
-        ></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            class="d-block w-100 img-carrossel"
-            src="../assets/condicionamento.jpg"
-            alt="Primeiro Slide"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            class="d-block w-100 img-carrossel"
-            src="../assets/hipertrofia.jpg"
-            alt="Segundo Slide"
-          />
-        </div>
-        <div class="carousel-item">
-          <img
-            class="d-block w-100 img-carrossel"
-            src="../assets/musculacao.jpg"
-            alt="Terceiro Slide"
-          />
-        </div>
-      </div>
-      <a
-        class="carousel-control-prev"
-        href="#carouselExampleIndicators"
-        role="button"
-        data-slide="prev"
+    <div>
+      <b-carousel
+        id="carousel-1"
+        v-model="slide"
+        :interval="4000"
+        controls
+        indicators
+        background="#ababab"
+        @sliding-start="onSlideStart"
+        @sliding-end="onSlideEnd"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-      </a>
-      <a
-        class="carousel-control-next"
-        href="#carouselExampleIndicators"
-        role="button"
-        data-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-      </a>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100 img-carrossel"
+              src="../assets/condicionamento.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100 img-carrossel"
+              src="../assets/hipertrofia.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+        <b-carousel-slide>
+          <template #img>
+            <img
+              class="d-block img-fluid w-100 img-carrossel" 
+              src="../assets/musculacao.jpg"
+              alt="image slot"
+            />
+          </template>
+        </b-carousel-slide>
+      </b-carousel>
     </div>
 
     <div class="container-fluid mt-5 p-0 d-inline-flex" id="dietas">
@@ -197,6 +178,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      slide: 0,
+      sliding: null,
       user_logged: false,
     };
   },
@@ -204,60 +187,59 @@ export default {
     this.checkUserLogged();
   },
   methods: {
-    async checkUserLogged() {
+    checkUserLogged() {
       let token = sessionStorage.access;
-      try {
-        let response = await axios({
-          method: 'GET',
-          url: "https://jml-musculacao-admin.herokuapp.com/auths/get_user_checked",
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        this.user_logged = true
-      } catch(e) {
+      if (token) {
+        this.user_logged = true;
+      } else {
         swal
-            .fire({
-              icon: "warning",
-              title: "Usuario não encontrado",
-              text: "Deseja criar um usuário?",
-              showCancelButton: true,
-              cancelButtonText: "Não",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Sim",
-              confirmButtonColor: "#3085d6",
-            })
-            .then((result) => {
-              if (result.value) {
-                this.$router.push({ name: "Cadastro" });
-              }
-            });
+          .fire({
+            icon: "warning",
+            title: "Usuario não encontrado",
+            text: "Deseja criar um usuário?",
+            showCancelButton: true,
+            cancelButtonText: "Não",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim",
+            confirmButtonColor: "#3085d6",
+          })
+          .then((result) => {
+            if (result.value) {
+              this.$router.push({ name: "Cadastro" });
+            }
+          });
       }
     },
     async logout() {
       try {
         let response = await axios({
-          method: 'POST',
-          url: 'https:/jml-musculacao-admin.herokuapp.com/auths/logout/',
+          method: "POST",
+          url: "https:/jml-musculacao-admin.herokuapp.com/auths/logout/",
           data: {
             refresh_token: sessionStorage.refresh,
-          }
-        })
+          },
+        });
         sessionStorage.clear();
         swal
           .fire({
             icon: "success",
-            title: "Usuário foi desconectado"
-          }).then((result) => {
+            title: "Usuário foi desconectado",
+          })
+          .then((result) => {
             window.location.reload();
-          })
-      } catch(e) {
-        swal
-          .fire({
-            icon: 'error',
-            title: 'Ocorreu um erro ao desconectar o usuário'
-          })
+          });
+      } catch (e) {
+        swal.fire({
+          icon: "error",
+          title: "Ocorreu um erro ao desconectar o usuário",
+        });
       }
+    },
+    onSlideStart(slide) {
+      this.sliding = true;
+    },
+    onSlideEnd(slide) {
+      this.sliding = false;
     },
   },
 };

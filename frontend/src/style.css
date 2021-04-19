@@ -127,3 +127,28 @@
 .wid {
     width: 10%;
 }
+
+#articleImg {
+    width: 300px;
+    height: 300px;
+    border: 2px black solid;
+}
+
+#loader {
+    display: none;
+}
+
+.no-margin {
+    margin: 0;
+    padding: 0;
+}
+
+.gallery {
+    font-size: 0.9em;
+    color: lightslategray;
+    word-break: break-all;
+}
+
+.article-item {
+    word-break: break-all;
+}

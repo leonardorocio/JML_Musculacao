@@ -1,6 +1,7 @@
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 from backend.core.serializers.article import Article, ArticleSerializer
+
 
 class ArticleViewSet(viewsets.ModelViewSet):
     permission_classes = (AllowAny, )
