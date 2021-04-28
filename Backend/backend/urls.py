@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
+from drf_spectacular.views import (
+    SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+)
+from rest_framework_simplejwt.views import TokenRefreshView
+from backend.core.serializers.token import MyTokenObtainPairView
 
 from django.conf.urls.static import static
 
@@ -33,7 +36,7 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/docs/redoc/', SpectacularRedocView.as_view(), name='redoc'),
     path('api/docs/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('auths/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auths/login/', MyTokenObtainPairView.as_view(), name='my_token'),
     path('auths/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('summernote/', include('django_summernote.urls')),
     path('', include(router.urls), name='create-user'),

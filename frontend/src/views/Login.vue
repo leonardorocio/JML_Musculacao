@@ -61,45 +61,39 @@ export default {
       this.pass = document.getElementById("userPass").value;
       try {
         let response = await axios({
-          method: 'POST',
-          url: 'https://jml-musculacao-admin.herokuapp.com/auths/login/',
+          method: "POST",
+          url: "http://localhost:8000/auths/login/",
           data: {
             email: this.email,
-            password: this.pass
+            password: this.pass,
           },
-        })
-        let access_token = response.data['access'];
-        let refresh_token = response.data['refresh'];
-        sessionStorage.setItem("access", access_token);
-        sessionStorage.setItem("refresh", refresh_token);
-        axios({
-            method: "GET",
-            url: "https://jml-musculacao-admin.herokuapp.com/auths/",
-            headers: {
-              Authorization: `Bearer ${access_token}`
-            },
-          }).then((resp) => {
-            const response = resp.data;
-            for (let r of response.values()) {
-              if (r.email == this.email) {
-                sessionStorage.setItem('id', r.id)
-                sessionStorage.setItem('email', r.email)
-              }
+        });
+        const data = response.data;
+        let arr = [];
+        for (let dt in data) {
+          if (dt === 'workout') {
+            const workout = data[dt]
+            for (let item in workout) {
+              arr.push(workout[item])
             }
+            sessionStorage.setItem(dt, arr)
+          } else {
+            sessionStorage.setItem(dt, data[dt]);
+          }
+        }
+        swal
+          .fire({
+            icon: "success",
+            title: "Login realizado com sucesso",
+          })
+          .then(() => {
+            this.$router.push({ name: "Home" });
           });
-          swal
-            .fire({
-              icon: "success",
-              title: "Login realizado com sucesso",
-            })
-            .then(() => {
-              this.$router.push({ name: "Home" });
-            });
       } catch (e) {
         swal.fire({
-            icon: "error",
-            title: `Ocorreu um erro ${e}`,
-          });
+          icon: "error",
+          title: `Ocorreu um erro ${e}`,
+        });
       }
     },
   },

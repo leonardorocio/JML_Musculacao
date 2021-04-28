@@ -1,5 +1,5 @@
-from backend.core.models.user import User
 from django.db import models
+from backend.core.models.user import User
 
 bio_sex = (
     ('M', 'Masculino'),
@@ -18,3 +18,4 @@ class Profile(models.Model):
     biosex = models.CharField(
         choices=bio_sex, max_length=101, blank=True, null=True)
     image = models.TextField(blank=True, null=True)
+    

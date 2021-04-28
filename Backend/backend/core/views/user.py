@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 
 
@@ -20,12 +21,8 @@ class UserViewSet(viewsets.ModelViewSet):
             return LogoutSerializer
         return UserSerializer
 
-    @action(detail=False, methods=['GET'])
-    def get_user_checked(self, request, pk=None):
-        return Response({'msg': 'Usuário autenticado com sucesso'})
-
     @action(detail=False, methods=['POST'])
-    def logout(self, request, pk=None):
+    def logout(self, request, pk=None) -> Response:
         try:
             refresh_token = request.data['refresh_token']
             token = RefreshToken(refresh_token)
@@ -33,3 +30,15 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=["GET"], detail=True)
+    def get_user_workout(self, request, pk) -> Response:
+        instance = User.objects.get(id=pk)
+        if instance is not None:
+            workout = UserSerializer(instance).data["workout"]
+            return Response(data={"workout": workout},
+                            content_type='application/json')
+        return Response(data={"error": "Ocorreu um erro"},
+                        content_type='application/json')
+
+

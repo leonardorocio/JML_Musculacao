@@ -2,7 +2,8 @@ import os
 
 from django.conf import settings
 
-def delete_local_images():
+
+def delete_local_images() -> None:
     root_media = settings.MEDIA_ROOT
     for root, dirs, files in os.walk(root_media):
         for file in files:

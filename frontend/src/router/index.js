@@ -43,6 +43,11 @@ const routes = [
     name: 'Dashboard',
     component: () => import('../views/Dashboard.vue')
   },
+  {
+    path: '/treinos/:id',
+    name: 'Exercicio',
+    component: () => import('../views/Exercicio.vue')
+  }
 ]
 
 const router = new VueRouter({

@@ -1,4 +1,3 @@
-from backend.core.serializers.user import UserSerializer
 from backend.core.models.user import User
 from backend.core.models.profile import Profile
 from rest_framework import serializers
@@ -7,19 +6,9 @@ from rest_framework import serializers
 class ProfileSerializer(serializers.ModelSerializer):
     owner_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
-    def create(self, validated_data):
-        prof = Profile.objects.create(
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            age=validated_data['age'],
-            height=validated_data['height'],
-            weight=validated_data['weight'],
-            biosex=validated_data['biosex'],
-            owner_id=UserSerializer(validated_data['owner_id']).data['id'],
-            image=validated_data['image']
-        )
-        prof.save()
-        return prof
+    def create(self, validated_data: dict) -> dict:
+        validated_data["owner_id"] = validated_data['owner_id'].id
+        return super().create(validated_data)
 
     class Meta:
         model = Profile

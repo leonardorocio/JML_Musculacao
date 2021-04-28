@@ -17,7 +17,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category, verbose_name='Categoria',
                                  on_delete=models.DO_NOTHING)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
     class Meta:

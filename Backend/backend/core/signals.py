@@ -24,13 +24,11 @@ def correct_html_and_path(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Article)
 def remake_image(sender, instance, **kwargs):
-    if not instance.image_post:
+    if instance.image_post:
         resize_image(instance.image_post)
         firebase.storage.child(
             f'media/{instance.image_post.name}').put(
             fr'{instance.image_post.path}')
-    else:
-        return
 
 
 # @receiver(post_save, sender=Profile)

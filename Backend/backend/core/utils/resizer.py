@@ -3,7 +3,7 @@ from django.conf import settings
 import os
 
 
-def resize_image(path, max_width=800):
+def resize_image(path: str, max_width: int = 800) -> None:
     try:
         if path.name:
             full_path = os.path.join(settings.MEDIA_ROOT, path.name)

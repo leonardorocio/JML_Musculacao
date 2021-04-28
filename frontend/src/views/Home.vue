@@ -19,11 +19,6 @@
             </li>
             <li class="nav-item">
               <router-link class="nav-link text-white" :to="{ name: 'Home' }"
-                >Treinos</router-link
-              >
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link text-white" :to="{ name: 'Home' }"
                 >Calistenia</router-link
               >
             </li>
@@ -31,7 +26,7 @@
               <router-link
                 class="nav-link text-white"
                 :to="{ name: 'Articles' }"
-                >Suplementação</router-link
+                >Artigos</router-link
               >
             </li>
             <li class="nav-item">

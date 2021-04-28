@@ -1,6 +1,6 @@
 <template>
-  <body style="background-color: black" class="no-margin">
-    <nav class="navbar navbar-expand-lg navbar-light">
+  <body class="no-margin">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
       <img
         src="../assets/logo.png"
         alt="Background"
@@ -18,17 +18,12 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link text-white" :to="{ name: 'Home' }"
-              >Treinos</router-link
-            >
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link text-white" :to="{ name: 'Home' }"
               >Calistenia</router-link
             >
           </li>
           <li class="nav-item">
             <router-link class="nav-link text-white" :to="{ name: 'Articles' }"
-              >Suplementação</router-link
+              >Artigos</router-link
             >
           </li>
           <li class="nav-item">
@@ -39,8 +34,23 @@
         </ul>
       </div>
     </nav>
-    <div class="container-fluid bg-light">
-      <ul class="d-flex justify-content-between mr-5" style="list-style: none">
+
+    <form>
+      <div class="form-group container-fluid d-flex flex-column align-items-start wide">
+        <label for="search" class="mt-2">Procure por artigos: </label>
+        <input
+          type="search"
+          name="searcher"
+          class="form-control w-100"
+          id="search"
+          placeholder="Digite aqui"
+          @keypress.enter="search()"
+        />
+      </div>
+    </form>
+
+    <div class="container-fluid">
+      <ul class="d-flex justify-content-between mr-5 ml-3" style="list-style: none">
         <li
           v-for="(art, img) in articles.slice(
             (currentPage - 1) * perPage,
@@ -49,7 +59,7 @@
           v-bind:key="art.id"
           class="mt-5"
         >
-          <div class="container article-item">
+          <div class="container d-flex flex-column article-item">
             <img
               class="d-block"
               :src="images[art.id.toString()]"
@@ -65,17 +75,18 @@
               v-else
             />
             <router-link
-              style="text-decoration: none"
+              style="text-decoration: none;"
               :to="{
                 name: 'Article',
                 params: { id: art.id, title: art.title },
               }"
             >
               {{ art.title }}
-              <br />
-              <span>
-                {{ art.text.substring(0, 10) }}
-              </span>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                Natus sapiente quas aliquam unde cumque deserunt harum dolore
+                ASHUDAPIhuDPAuDPADPAIDPIAhPIAhPDIaIUhu
+              </p>
               <span class="gallery"
                 >{{ art.category }} | Leonardo | 12/12/2021 às 10:30</span
               >

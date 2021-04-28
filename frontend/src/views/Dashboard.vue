@@ -216,6 +216,7 @@ export default {
           },
         });
         this.profileId = response.data;
+        sessionStorage.setItem("profileId", this.profileId);
       } catch (e) {
         swal.fire({
           icon: "error",
