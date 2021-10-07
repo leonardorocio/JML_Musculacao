@@ -1,16 +1,19 @@
+import requests
+from backend.core.models.user import User
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from backend.core.models import Article, Profile
 from backend.core.utils.resizer import resize_image
 from backend.core.utils import firebase, clear_media
-from django.conf import settings
+from django.db.utils import IntegrityError
 
 
 @receiver(pre_save, sender=Article)
 def correct_html_and_path(sender, instance, **kwargs):
     instance.text = instance.text.replace("\"", "\'")
     img_tag = instance.text.split("img ")
-    if len(img_tag) == 1 or 'firebase' in instance.text:
+    print(img_tag)
+    if 'firebase' in instance.text or len(img_tag) == 1:
         return
     else:
         img = img_tag[1].split(' ')
@@ -24,33 +27,29 @@ def correct_html_and_path(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Article)
 def remake_image(sender, instance, **kwargs):
-    if instance.image_post:
-        resize_image(instance.image_post)
-        firebase.storage.child(
-            f'media/{instance.image_post.name}').put(
-            fr'{instance.image_post.path}')
+    if 'firebase' not in instance.image_post.name:
+        url = firebase.storage.child(
+            f'media/{instance.image_post.name}').get_url(None)
+        request = requests.get(url=url)
+        if not request.status_code == 200:
+            resize_image(instance.image_post)
+            firebase.storage.child(
+                f'media/{instance.image_post.name}').put(
+                fr'{instance.image_post.path}')
+            Article.objects.filter(id=instance.id).update(
+                image_post=url
+            )
 
 
-# @receiver(post_save, sender=Profile)
-# def resize_profile_img(sender, instance, **kwargs):
-#     if instance.image.startswith('http'):
-#         name = instance.image[82:instance.image.index('?')]
-#         name = name.replace('%20', ' ')
-#         try:
-#             firebase.storage.child(
-#                 f'images/{name}').download(
-#                     settings.MEDIA_ROOT[1:],
-#                     fr'{settings.MEDIA_ROOT[1:]}/{name}')
-#             resize_image(name)
-#             clear_media.delete_local_images()
-#         except FileNotFoundError:
-#             new_media = settings.MEDIA_ROOT[5:]
-#             firebase.storage.child(
-#                 f'images/{name}').download(new_media, fr'{new_media}/{name}')
-#             resize_image(name)
-#             clear_media.delete_local_images()
-#         except Exception as e:
-#             print(f'Erro: {e}')
+@receiver(post_save, sender=User)
+def create_profile_for_user(sender, instance, **kwargs):
+    try:
+        if not Profile.objects.filter(owner_id=instance.id):
+            Profile.objects.create(
+                owner_id=instance.id
+            )
+    except IntegrityError as e:
+        print(f'Erro: {e}')
 
 
 clear_media.delete_local_images()

@@ -9,4 +9,12 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
         fields = ['id', 'title', 'text',
-                  'category', 'autor_post', 'image_post']
+                  'category', 'autor_post', 'image_post', ]
+
+
+class SearchArticleSerializer(serializers.ModelSerializer):
+    termo = serializers.CharField()
+
+    class Meta:
+        model = Article
+        fields = ['termo']

@@ -6,14 +6,15 @@ from rest_framework import serializers
 class ProfileSerializer(serializers.ModelSerializer):
     owner_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
-    def create(self, validated_data: dict) -> dict:
-        validated_data["owner_id"] = validated_data['owner_id'].id
-        return super().create(validated_data)
+    def create(self, validated_data):
+        vd = validated_data.copy()
+        vd['owner_id'] = vd['owner_id'].id
+        return super().create(vd)
 
     class Meta:
         model = Profile
-        fields = ['id', 'first_name', 'last_name', 'age',
-                  'height', 'weight', 'biosex', 'owner_id', 'image']
+        fields = ['id', 'age', 'height', 'weight', 'biosex', 'owner_id',
+                  'image']
 
 
 class GetProfileIdSerializer(serializers.ModelSerializer):

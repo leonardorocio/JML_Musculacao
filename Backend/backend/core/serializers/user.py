@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 import django.contrib.auth.password_validation as validators
 from backend.core.models import User
 from django.core import exceptions
@@ -20,8 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data: dict) -> dict:
         # Falta validar outras informações
         if not ('PATCH' in str(self.context['request']) and
-                self.initial_data.get("password") is None and
-                len(self.initial_data) == 1):
+                self.initial_data.get("password") is None):
             password = data.get('password')
             errors = dict()
             try:
@@ -38,10 +38,19 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(
             username=validated_data['email'],
             email=validated_data['email']
+            # first_name=validated_data['first_name'],
+            # last_name=validated_data['last_name']
         )
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+    def update(self, instance, validated_data):
+        if not ('PATCH' in str(self.context['request']) and
+                self.initial_data.get("password") is None):
+            validated_data['password'] = make_password(validated_data['password'])
+            return super().update(instance, validated_data)
+        return super().update(instance, validated_data)
 
     class Meta:
         model = User

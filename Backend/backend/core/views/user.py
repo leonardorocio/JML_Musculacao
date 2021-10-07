@@ -5,7 +5,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import status
 
 
@@ -37,8 +36,10 @@ class UserViewSet(viewsets.ModelViewSet):
         if instance is not None:
             workout = UserSerializer(instance).data["workout"]
             return Response(data={"workout": workout},
-                            content_type='application/json')
-        return Response(data={"error": "Ocorreu um erro"},
-                        content_type='application/json')
+                            content_type='application/json',
+                            status=status.HTTP_200_OK)
+        return Response(data={"error": "Não foi possível pegar o treino."},
+                        content_type='application/json',
+                        status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -5,51 +5,28 @@
     >
       <h2 class="display-4 text-center" id="meuPerfil">Meu Perfil</h2>
 
-      <div class="container-fluid d-flex align-items-center flex-column">
-        <img
-          :src="profileImage"
-          alt="Icone Rosto"
-          id="faceIcon"
-          @click="chooseImage"
-        />
-        <img src="" id="toUpload" style="display: none" alt="" />
-        <div class="form-group d-flex align-items-center flex-column">
-          <label for="faceInput" class="" id="userInfo">Perfil</label>
-          <input
-            type="file"
-            ref="fileInput"
-            class="form-control-file form-control-sm"
-            id="faceInput"
-            @input="onSelectFile"
+      <form action="" id="profileForm" ref="profileForm">
+        <div class="container-fluid d-flex align-items-center flex-column">
+          <img
+            :src="image"
+            alt="Icone Rosto"
+            id="faceIcon"
+            @click="chooseImage"
           />
+          <img src="" id="toUpload" style="display: none" alt="" />
+          <div class="form-group d-flex align-items-center flex-column">
+            <label for="faceInput" class="" id="userInfo">Perfil</label>
+            <input
+              type="file"
+              ref="fileInput"
+              class="form-control-file form-control-sm"
+              id="faceInput"
+              name="faceInput"
+              @input="onSelectFile"
+            />
+          </div>
         </div>
-      </div>
 
-      <form action="" class="mb-3">
-        <div class="form-group row mb-2">
-          <label for="firstName" class="col-sm-2">Nome:</label>
-          <div class="col-sm-10">
-            <input
-              placeholder="Luís"
-              type="text"
-              class="form-control form-control-sm"
-              id="firstName"
-              :value="first_name"
-            />
-          </div>
-        </div>
-        <div class="form-group row mb-2">
-          <label for="lastName" class="col-sm-2">Sobrenome:</label>
-          <div class="col-sm-10">
-            <input
-              placeholder="Ex: Henrique"
-              type="text"
-              class="form-control form-control-sm"
-              id="lastName"
-              :value="last_name"
-            />
-          </div>
-        </div>
         <div class="form-group row mb-2">
           <label for="age" class="col-sm-2">Idade:</label>
           <div class="col-sm-10">
@@ -58,6 +35,7 @@
               type="text"
               class="form-control form-control-sm"
               id="age"
+              name="age"
               :value="age"
             />
           </div>
@@ -70,6 +48,7 @@
               type="text"
               class="form-control form-control-sm"
               id="height"
+              name="height"
               :value="height"
             />
           </div>
@@ -82,6 +61,7 @@
               type="text"
               class="form-control form-control-sm"
               id="weight"
+              name="weight"
               :value="weight"
             />
           </div>
@@ -91,7 +71,7 @@
           <input
             class="form-check-input ml-5"
             type="radio"
-            name="sexRadio"
+            name="biosex"
             id="sexFeminino"
             value="F"
             :checked="biosex == 'F' ? true : false"
@@ -102,7 +82,7 @@
           <input
             class="form-check-input"
             type="radio"
-            name="sexRadio"
+            name="biosex"
             id="sexMasculino"
             value="M"
             :checked="biosex == 'M' ? true : false"
@@ -125,34 +105,21 @@
 import axios from "axios";
 
 const firebase = require("../components/app.js");
+const errorLog = require("../components/backend_errors.js");
 
 export default {
   data() {
     return {
       owner_id: sessionStorage.id,
-      first_name: "",
-      last_name: "",
-      age: null,
-      height: null,
-      weight: null,
+      age: undefined,
+      height: undefined,
+      weight: undefined,
       biosex: "",
-      saveMethod: "",
       token: sessionStorage.access,
-      profileId: null,
-      profileImage: require("../assets/icone_rosto.png"),
-      toUploadImage: "",
+      image: require("../assets/icone_rosto.png"),
     };
   },
-  async mounted() {
-    try {
-      await this.getProfileId();
-    } catch(e) {
-      swal
-        .fire({
-          icon: 'error',
-          title: `Erro ${e}`
-        })
-    }
+  async created() {
     this.getUserProfile();
   },
 
@@ -180,7 +147,7 @@ export default {
             });
           });
       } else {
-        return null;
+        this.saveProfile(null);
       }
     },
 
@@ -195,33 +162,11 @@ export default {
         const reader = new FileReader();
 
         reader.onload = (e) => {
-          this.$emit("input", e.target.result);
-          this.profileImage = e.target.result;
+          this.$emit('image', e.target.result)
+          this.image = e.target.result;
         };
 
         reader.readAsDataURL(files[0]);
-      }
-    },
-    async getProfileId() {
-      try {
-        let response = await axios({
-          method: "POST",
-          url:
-            "https://jml-musculacao-admin.herokuapp.com/profiles/get_profile_id/",
-          data: {
-            owner_id: parseInt(this.owner_id),
-          },
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        });
-        this.profileId = response.data;
-        sessionStorage.setItem("profileId", this.profileId);
-      } catch (e) {
-        swal.fire({
-          icon: "error",
-          title: "Não foi possível achar o identificar do perfil",
-        });
       }
     },
 
@@ -229,131 +174,53 @@ export default {
       try {
         let response = await axios({
           method: "GET",
-          url: `https://jml-musculacao-admin.herokuapp.com/profiles/${parseInt(
-            this.profileId
-          )}/`,
+          url: `http://localhost:8000/profiles/${parseInt(this.owner_id)}/`,
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
         });
         let resp = response.data;
-        if (
-          resp.first_name ||
-          resp.last_name ||
-          resp.age ||
-          resp.height ||
-          resp.weight ||
-          resp.biosex ||
-          resp.image
-        ) {
-          this.first_name = resp.first_name;
-          this.last_name = resp.last_name;
-          this.age = resp.age;
-          this.height = resp.height;
-          this.weight = resp.weight;
-          this.biosex = resp.biosex;
-          this.profileImage = resp.image;
-          this.saveMethod = "PUT";
-        } else {
-          this.saveMethod = "POST";
+        const obj = this
+        for (let dt in resp) {
+          if (
+            dt != "owner_id" &&
+            dt != 'token'
+          ) {
+            obj.$data[dt] = resp[dt];
+          }
         }
       } catch (e) {
-        if (e.response.status == 404) {
-          document.getElementById("userInfo").innerHTML += "não registrado";
-          this.saveMethod = "POST";
-        } else {
-          swal.fire({
-            icon: "error",
-            title: `Erro ${e}`,
-          });
-        }
+        errorLog.errorHandle(e)
       }
     },
 
     async saveProfile(filepath) {
-      this.first_name = document.getElementById("firstName").value;
-      this.last_name = document.getElementById("lastName").value;
-      this.age = document.getElementById("age").value;
-      this.height = document.getElementById("height").value;
-      this.weight = document.getElementById("weight").value;
-      let manRadio = document.getElementById("sexMasculino");
-      let womanRadio = document.getElementById("sexFeminino");
-      this.biosex = manRadio.checked ? manRadio.value : womanRadio.value;
-
-      if (this.saveMethod == "POST") {
-        try {
-          let response = await axios({
-            method: "POST",
-            url: "https://jml-musculacao-admin.herokuapp.com/profiles/",
-            headers: {
-              Authorization: "Bearer " + this.token,
-            },
-            data: {
-              owner_id: parseInt(this.owner_id),
-              first_name: this.first_name,
-              last_name: this.last_name,
-              age: this.age,
-              height: this.height,
-              weight: this.weight,
-              biosex: this.biosex,
-              image: filepath,
-            },
+      const form = this.$refs.profileForm;
+      var formData = new FormData(form);
+      if (filepath != null) { formData.append('image', filepath) }
+      try {
+        let response = await axios({
+          method: "PATCH",
+          url: `http://localhost:8000/profiles/${parseInt(this.owner_id)}/`,
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+          data: formData, 
+        });
+        swal
+          .fire({
+            icon: "success",
+            title: `Usuário atualizado com sucesso`,
+          })
+          .then((result) => {
+            window.location.reload();
           });
-          swal
-            .fire({
-              icon: "success",
-              title: `Usuário cadastrado com sucesso`,
-            })
-            .then((result) => {
-              window.location.reload();
-            });
-        } catch (e) {
-          swal.fire({
-            icon: "error",
-            title: `Não foi possível cadastrar usuário. Erro: ${e}`,
-          });
-        }
-      } else {
-        try {
-          let response = await axios({
-            method: "PUT",
-            url: `https://jml-musculacao-admin.herokuapp.com/profiles/${parseInt(
-              this.profileId
-            )}/`,
-            headers: {
-              Authorization: "Bearer " + this.token,
-            },
-            data: {
-              owner_id: this.owner_id,
-              first_name: this.first_name,
-              last_name: this.last_name,
-              age: this.age,
-              height: this.height,
-              weight: this.weight,
-              biosex: this.biosex,
-              image: filepath,
-            },
-          });
-          swal
-            .fire({
-              icon: "success",
-              title: `Usuário atualizado com sucesso`,
-            })
-            .then((result) => {
-              window.location.reload();
-            });
-        } catch (e) {
-          swal.fire({
-            icon: "error",
-            title: `Não foi possível atualizar usuário. Erro: ${e}`,
-          });
-        }
+      } catch (e) {
+        errorLog.errorHandle(e);
       }
     },
   },
 };
 </script>
 
-
-<style>
-</style>
+<style></style>

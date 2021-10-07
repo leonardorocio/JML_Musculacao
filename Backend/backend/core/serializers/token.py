@@ -18,7 +18,7 @@ class MyTokenObtainPairSerializer(TokenObtainSerializer):
         return user.id, user.workout
 
     @classmethod
-    def get_user_id(cls):
+    def get_user_id(cls, user):
         pass
 
     def validate(self, attrs: dict) -> dict:

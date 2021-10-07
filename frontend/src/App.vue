@@ -4,6 +4,6 @@
   </div>
 </template>
 
-<style lang="scss">
-@import '../node_modules/bootstrap';
+<style>
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 </style>

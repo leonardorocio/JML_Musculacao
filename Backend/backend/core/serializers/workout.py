@@ -7,4 +7,4 @@ class TreinoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Treino
-        fields = ['id', 'avg_level', 'body_part', 'exercise']
+        fields = ['id', 'avg_level', 'body_part', 'exercise', 'descricao']

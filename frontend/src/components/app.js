@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/storage';
+import {initializeApp, } from 'firebase/app';
+import {ref} from 'firebase/storage';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDLmRU7KMoZsByDYCLmrTqCG3wrePa8TnU",
@@ -11,9 +11,8 @@ var firebaseConfig = {
   appId: "1:942758114362:web:77638d14e485d678a3b103"
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-const storRef = firebase.storage().ref();
+initializeApp(firebaseConfig);
+const storRef = ref();
 
 export {
   storRef

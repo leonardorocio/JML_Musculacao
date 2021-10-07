@@ -1,167 +1,196 @@
 #header {
-    background-image: url(./assets/Background_header.jpg);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    height: 100vh;
+  background-image: url(./assets/Background_header.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .nav-item {
-    font-size: 1.7vw;
+  font-size: 1.7vw;
 }
 
 #imageLogo {
-    margin-right: 3%;
+  margin-right: 3%;
 }
 
 #botaoInscricao {
-    font-size: 1.7vw;
-    background-color: #4bd1a0;
-    color: white;
-    border-color: #4bd1a0;
+  font-size: 1.7vw;
+  background-color: #4bd1a0;
+  color: white;
+  border-color: #4bd1a0;
 }
 
 #botaoInscricao:hover {
-    transition: 0.5s;
-    background-color: white;
-    color: #4bd1a0;
+  transition: 0.5s;
+  background-color: white;
+  color: #4bd1a0;
 }
 
 #botaoInscricao:hover #auth-link {
-    color: #4bd1a0;
+  color: #4bd1a0;
 }
 
 #auth-link {
-    color: white;
+  color: white;
 }
 
 #auth-link:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-#beneficios, #beneficios > * {
-    background-color: #4bd1a0;
-    font-size: 1.8vw;
+#beneficios,
+#beneficios > * {
+  background-color: #4bd1a0;
+  font-size: 1.8vw;
 }
 
 #lista-beneficios li {
-    background-color: #4bd1a0;
-    font-size: 1.5vw;
-    border: 0;
+  background-color: #4bd1a0;
+  font-size: 1.5vw;
+  border: 0;
 }
 
 #lista-beneficios li:hover {
-    border-bottom: 0;
+  border-bottom: 0;
 }
 
 .img-carrossel {
-    height: 40rem;
+  height: 40rem;
 }
 
 #suplemento {
-    background-image: url(./assets/suplementacao.jpg);   
+  background-image: url(./assets/suplementacao.jpg);
 }
 
 #dieta {
-    background-image: url(./assets/dieta.jpg);
+  background-image: url(./assets/dieta.jpg);
 }
 
 .alimentacao {
-    background-color: black;
-    height: 30rem;
-    background-size: 100%;
+  background-color: black;
+  height: 30rem;
+  background-size: 100%;
 }
 
 #dietas p {
-    font-size: 2.5vw;
-    position: absolute;
-    z-index: 1;
+  font-size: 2.5vw;
+  position: absolute;
+  z-index: 1;
 }
 
 .alimento {
-    position: absolute;
-    top: 70%;
-    left: 22.5%;
-    color: white;
-    background-color: #4bd1a0;
-    border-color: #4bd1a0;
-    font-size: 1.5vw;
+  position: absolute;
+  top: 70%;
+  left: 22.5%;
+  color: white;
+  background-color: #4bd1a0;
+  border-color: #4bd1a0;
+  font-size: 1.5vw;
 }
 
 .alimento:hover {
-    transition: 0.5s;
-    background-color: transparent;
-    border-color: #4bd1a0;
+  transition: 0.5s;
+  background-color: transparent;
+  border-color: #4bd1a0;
 }
 
 #fundoCadastro {
-    background-color: #4bd1a0;
-    height: 100vh;
+  background-color: #4bd1a0;
+  height: 100vh;
 }
 
 .forms {
-    position: relative;
-    top: 20vh;
-    height: 60vh;
-    width: 30vw;
-    border-radius: 1.5vw;
+  position: relative;
+  top: 20vh;
+  height: 60vh;
+  width: 30vw;
+  border-radius: 1.5vw;
 }
 
 .profiles {
-    position: relative;
-    top: 5vh;
-    height: 90vh;
-    border-radius: 1.5vw;
+  position: relative;
+  top: 5vh;
+  height: 90vh;
+  border-radius: 1.5vw;
 }
 
 #faceIcon {
-    border-radius: 50%;
-    height: 25vh;
-    width: 25vh;
-    cursor: pointer;
+  border-radius: 50%;
+  height: 25vh;
+  width: 25vh;
+  cursor: pointer;
 }
 
 #faceInput {
-    display: none;
+  display: none;
 }
 
 .wid {
-    width: 10%;
+  width: 10%;
 }
 
 #loader {
-    display: none;
+  display: none;
 }
 
 .no-margin {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .gallery {
-    font-size: 0.9em;
-    color: lightslategray;
-    word-break: break-all;
+  font-size: 0.9em;
+  color: lightslategray;
+  word-break: break-all;
 }
 
 .article-item {
-    word-break: break-all;
-    width: 20vw;
-    height: 55vh;
-    border: 1px #4bd1a0 solid;
+  word-break: break-all;
 }
 
 #articleImg {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 60%;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 60%;
 }
 
 .wide {
-    width: 90%;
-    padding: 0;
+  width: 90%;
+  padding: 0;
 }
 
 .btn-delete {
-    width: 15%;
+  width: 15%;
+}
+
+#article-text {
+  text-align: justify;
+  font-size: 15px;
+  border: 2px solid #4bd1a0;
+}
+
+#button-comment {
+  width: 15%;
+  padding: 3px;
+}
+
+#workout-image {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 60%;
+}
+
+#workout-list {
+  list-style-type: none;
+}
+
+#workout-exercises {
+  color: black;
+}
+
+#workout-exercises:hover {
+  text-decoration: none;
+  color: #4bd1a0;
 }

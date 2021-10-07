@@ -1,6 +1,9 @@
 <template>
   <body class="no-margin">
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
+    <nav
+      class="navbar navbar-expand-lg navbar-light"
+      style="background-color: black"
+    >
       <img
         src="../assets/logo.png"
         alt="Background"
@@ -36,64 +39,67 @@
     </nav>
 
     <form>
-      <div class="form-group container-fluid d-flex flex-column align-items-start wide">
+      <div
+        class="form-group container-fluid d-flex flex-column align-items-start wide"
+      >
         <label for="search" class="mt-2">Procure por artigos: </label>
         <input
           type="search"
           name="searcher"
+          ref="searcher"
           class="form-control w-100"
           id="search"
           placeholder="Digite aqui"
-          @keypress.enter="search()"
         />
       </div>
     </form>
 
     <div class="container-fluid">
-      <ul class="d-flex justify-content-between mr-5 ml-3" style="list-style: none">
+      <ul
+        class="d-flex justify-content-between mr-5 ml-3"
+        style="list-style: none"
+      >
         <li
-          v-for="(art, img) in articles.slice(
+          v-for="(art, index) in articles.slice(
             (currentPage - 1) * perPage,
             (currentPage - 1) * perPage + perPage
           )"
           v-bind:key="art.id"
           class="mt-5"
         >
-          <div class="container d-flex flex-column article-item">
+          
+          <div class="card" style="max-width: 20vw">
             <img
-              class="d-block"
-              :src="images[art.id.toString()]"
+              class="card-img-top"
+              :src="images[index]"
               id="articleImg"
               alt="Imagem do artigo"
               v-if="art.image_post"
             />
-            <img
-              class="d-block"
-              src="../assets/carregando.gif"
-              id="articleImg"
-              alt="Imagem do artigo"
-              v-else
-            />
-            <router-link
-              style="text-decoration: none;"
-              :to="{
-                name: 'Article',
-                params: { id: art.id, title: art.title },
-              }"
-            >
-              {{ art.title }}
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                Natus sapiente quas aliquam unde cumque deserunt harum dolore
-                ASHUDAPIhuDPAuDPADPAIDPIAhPIAhPDIaIUhu
-              </p>
-              <span class="gallery"
-                >{{ art.category }} | Leonardo | 12/12/2021 às 10:30</span
-              >
-            </router-link>
+            <div class="card-body">
+              <div class="card-text article-item">
+                <router-link
+                  style="text-decoration: none"
+                  :to="{
+                    name: 'Article',
+                    params: { id: art.id, title: art.title },
+                  }"
+                >
+                  {{ art.title }}
+                  <p class="gallery">
+                    {{ writeSummernote(art.text) }}
+                  </p>
+                  <span class="gallery"
+                    >{{ art.category }} | Leonard | 12/12/2021 às 10:30</span
+                  >
+                </router-link>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
+
+      <!-- <h2 class="display-3 text-center" >Não foram encontrados artigos com esse termo.</h2> -->
 
       <b-pagination
         class="d-flex justify-content-center align-items-end mt-5"
@@ -110,21 +116,23 @@
 import axios from "axios";
 
 const firebase = require("../components/app.js");
+const errorLog = require("../components/backend_errors.js");
 
 export default {
   data() {
     return {
       articles: [],
-      images: {},
+      images: [],
       token: sessionStorage.access,
       perPage: 4,
       currentPage: 1,
+      searchKey: ''
     };
   },
-  mounted() {
-    this.getArticles();
+  created() {
+    this.getSearchedKey();
   },
-  updated() {
+  mounted() {
     this.getArticles();
   },
   methods: {
@@ -132,20 +140,21 @@ export default {
       try {
         let response = await axios({
           method: "get",
-          url: "https://jml-musculacao-admin.herokuapp.com/articles/",
+          url: `http://localhost:8000/articles${this.searchKey}`,
           headers: {
             Authorization: "Bearer " + this.token,
           },
         });
         this.articles = response.data;
-        this.articles.forEach((art) => {
-          this.getArticleImageURL(art);
+        this.articles.forEach((art, index) => {
+          this.images.push(this.getArticleImageURL(art));
         });
       } catch (e) {
         swal.fire({
-          icon: "error",
-          title: `Ocorreu um erro ${e}`,
-        });
+          icon: 'error',
+          title: `Erro: ${e}`
+        })
+        errorLog.errorHandle(e);
       }
     },
 
@@ -155,23 +164,26 @@ export default {
 
     getArticleImageURL(article) {
       if (article.image_post != null) {
-        const fileName = article.image_post.split("images/");
-        const firebasePath = `media/images/${fileName[1]}`;
-        const downloader = this;
-        firebase.storRef
-          .child(firebasePath)
-          .getDownloadURL()
-          .then((url) => {
-            downloader.images[article.id] = url;
-          })
-          .catch((e) => {
-            swal.fire({
-              icon: "success",
-              title: "Não foi possível baixar as imagens de artigo",
-            });
-          });
+        let url = article.image_post.split('media/')[1]
+        url = decodeURIComponent(url.replace(/\+/g,  " "))
+        url = url.substring(0, 6) + '/' + url.substring(6, url.length)
+        return url
       }
     },
+    getSearchedKey() {
+      const path = document.URL;
+      if (path.indexOf('?') > -1) {
+        this.searchKey += path.substring(path.indexOf('?'));
+        return
+      }
+      this.searchKey += '/';
+    },
+    writeSummernote(articleText) {
+      var div = document.createElement("div");
+      div.innerHTML = articleText;
+      var text = div.textContent || div.innerText || "";
+      return text.split('.')[0];
+    }
   },
   computed: {
     rows() {
@@ -181,6 +193,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import url("../style.css");
 </style>

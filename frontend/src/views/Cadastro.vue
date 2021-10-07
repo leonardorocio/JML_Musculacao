@@ -11,6 +11,7 @@
           <input
             type="email"
             name="userEmail"
+            v-model="email"
             id="userEmail"
             class="form-control"
             placeholder="Ex: leonardof.rocio@gmail.com"
@@ -22,6 +23,7 @@
           <input
             type="password"
             name="userPass"
+            v-model="pass"
             id="userPass"
             class="form-control"
             placeholder="*********"
@@ -48,6 +50,8 @@
 import axios from "axios";
 import router from "vue-router";
 
+const errorLog = require("../components/backend_errors.js");
+
 export default {
   data() {
     return {
@@ -57,12 +61,10 @@ export default {
   },
   methods: {
     async signUp() {
-      this.email = document.getElementById("userEmail").value;
-      this.pass = document.getElementById("userPass").value;
       try {
         let response = await axios({
           method: "POST",
-          url: "https://jml-musculacao-admin.herokuapp.com/auths/",
+          url: "http://localhost:8000/auths/",
           data: {
             email: this.email,
             password: this.pass,
@@ -77,24 +79,15 @@ export default {
             this.$router.push({ name: "Login" });
           });
       } catch (e) {
-        var errorCode = "";
-        for (let err in e.response.data) {
-          errorCode += e.response.data[`${err}`][0];
-        }
-        errorCode = errorCode.charAt(0).toUpperCase() + errorCode.substring(1)
-        swal.fire({
-          icon: "error",
-          title: `Erro: ${errorCode}`,
-        }).then(() => {
-          document.getElementById("userEmail").value = "";
-          document.getElementById("userPass").value = "";
-        });
+        errorLog.errorHandle(e);
+        this.email = '';
+        this.pass = '';
       }
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style>
 @import url("../style.css");
 </style>

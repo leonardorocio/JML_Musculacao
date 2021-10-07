@@ -169,6 +169,7 @@
 
 <script>
 import axios from "axios";
+import { errorHandle } from '../components/backend_errors';
 
 export default {
   data() {
@@ -224,10 +225,7 @@ export default {
             window.location.reload();
           });
       } catch (e) {
-        swal.fire({
-          icon: "error",
-          title: "Ocorreu um erro ao desconectar o usuário",
-        });
+        errorHandle(e)
       }
     },
     onSlideStart(slide) {
@@ -244,6 +242,6 @@ export default {
 </style>
 
 <style>
-@import url("../assets/style.css");
+@import url("../style.css");
 </style>
 

@@ -12,6 +12,7 @@
             type="email"
             name="userEmail"
             id="userEmail"
+            v-model="email"
             class="form-control"
             placeholder="Ex: leonardof.rocio@gmail.com"
             aria-describedby="helpId"
@@ -22,6 +23,7 @@
           <input
             type="password"
             name="userPass"
+            v-model="pass"
             id="userPass"
             class="form-control"
             placeholder="*********"
@@ -48,6 +50,8 @@
 import axios from "axios";
 import router from "vue-router";
 
+const errorLog = require("../components/backend_errors.js");
+
 export default {
   data() {
     return {
@@ -57,8 +61,6 @@ export default {
   },
   methods: {
     async login() {
-      this.email = document.getElementById("userEmail").value;
-      this.pass = document.getElementById("userPass").value;
       try {
         let response = await axios({
           method: "POST",
@@ -71,12 +73,12 @@ export default {
         const data = response.data;
         let arr = [];
         for (let dt in data) {
-          if (dt === 'workout') {
-            const workout = data[dt]
+          if (dt === "workout") {
+            const workout = data[dt];
             for (let item in workout) {
-              arr.push(workout[item])
+              arr.push(workout[item]);
             }
-            sessionStorage.setItem(dt, arr)
+            sessionStorage.setItem(dt, arr);
           } else {
             sessionStorage.setItem(dt, data[dt]);
           }
@@ -90,15 +92,11 @@ export default {
             this.$router.push({ name: "Home" });
           });
       } catch (e) {
-        swal.fire({
-          icon: "error",
-          title: `Ocorreu um erro ${e}`,
-        });
+        errorLog.errorHandle(e);
       }
     },
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>
