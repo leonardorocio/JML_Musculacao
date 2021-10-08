@@ -182,10 +182,6 @@
   height: 60%;
 }
 
-#workout-list {
-  list-style-type: none;
-}
-
 #workout-exercises {
   color: black;
 }
@@ -205,3 +201,35 @@
   border-radius: 20px;
 }
 
+#workout-list :last-child {
+  margin-bottom: 1em;
+}
+
+#background-contato {
+  background-image: url('./assets/FundoJML1.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50vh;
+  border-bottom: 1px solid white;
+}
+
+#background-forms {
+  background-color: black;
+}
+
+#background-forms :first-child {
+  margin-top: 0.8em;
+}
+
+#border-pixel {
+  border: 0.05em solid white;
+  border-left: none;
+}
+
+#background-about {
+  border-top: 1px solid white;
+  background-image: url('./assets/FundoJML3.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50vh;
+}

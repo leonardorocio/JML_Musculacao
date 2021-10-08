@@ -95,6 +95,78 @@
       </div>
     </nav>
 
+    <div class="container-fluid d-flex justify-content-center mt-3">
+      <p class="display-4">Seus Treinos</p>
+    </div>
+
+    <div class="container-fluid w-75 articles-block mt-3 d-flex flex-column">
+      <h5 class="card-title mb-4">Adicione treinos ao seu perfil para melhorar sua organização!<br>
+        Para adicionar um treino, basta colocar o nome dele na caixa de seleção
+        abaixo e confirmar com o botão:
+      </h5>
+      <input
+        type="text"
+        v-model="wk"
+        list="data-workout"
+        placeholder="Digite aqui"
+        ref="addWorkout"
+      />
+      <datalist class="form-group" id="data-workout">
+        <option v-for="wk in workouts" :key="wk.body_part">
+          {{ wk.body_part }}
+        </option>
+      </datalist>
+      <button class="btn btn-primary mt-3 p-2" type="submit" style="width: 12%;" @click="postUserWorkout()">Adicionar</button>
+      <span class="font-weight-bold mt-3">Sua Lista de Treinos:</span>
+      <div>
+        <ul class="list-group">
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-center
+              mt-3
+            "
+          >
+            Braços
+            <button class="btn btn-danger ml-5 btn-delete pl-3 pr-3 pt-2 pb-2">
+              Excluir
+            </button>
+          </li>
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-center
+              mt-3
+            "
+          >
+            Peitoral
+            <button class="btn btn-danger ml-5 btn-delete pl-3 pr-3 pt-2 pb-2">
+              Excluir
+            </button>
+          </li>
+          <li
+            class="
+              list-group-item
+              d-flex
+              justify-content-between
+              align-items-center
+              mt-3
+            "
+          >
+            Pernas
+            <button class="btn btn-danger ml-5 btn-delete pl-3 pr-3 pt-2 pb-2">
+              Excluir
+            </button>
+          </li>
+        </ul>
+        <button class="btn btn-primary mt-3 mb-3 p-2" type="submit" style="width: 12%;" @click="postUserWorkout()">Salvar</button>
+      </div>
+    </div>
+
     <!-- <div>
     <div v-if="userWorkouts.length < 3 && userWorkouts">
       <p>Adicione treinos ao seu perfil para melhorar sua organização!</p>
@@ -130,7 +202,7 @@
       <p class="display-4">Treinos</p>
     </div>
 
-    <div class="container-fluid w-75 articles-block mt-3 d-flex flex-column ">
+    <div class="container-fluid w-75 articles-block mt-3 d-flex flex-column">
       <form>
         <div
           class="
@@ -156,7 +228,7 @@
         </div>
       </form>
 
-      <div class="container w-100 d-flex justify-content-around ">
+      <div class="container w-100 d-flex justify-content-around">
         <ul
           class="mt-4 mr-5"
           v-for="workout in workouts"
@@ -238,7 +310,7 @@ export default {
       addUserWorkouts: [],
       userWorkouts: sessionStorage.workout.split(","),
       perPage: 3,
-      currentPage: 1
+      currentPage: 1,
     };
   },
   created() {
@@ -255,7 +327,7 @@ export default {
       });
       this.workouts = workout.data;
       console.log(this.workouts);
-      console.log(this.workouts.descricao)
+      console.log(this.workouts.descricao);
     },
     replaceSpace(word) {
       word = word
@@ -272,8 +344,8 @@ export default {
       this.userWorkouts.splice(index, 1);
     },
     imageDescription(index) {
-      var image_link = this.workouts[index].descricao.split('firebase');
-      return 'https://firebase' + image_link[1];
+      var image_link = this.workouts[index].descricao.split("firebase");
+      return "https://firebase" + image_link[1];
     },
     sendUserWorkout() {
       let sendWorkout = {};
