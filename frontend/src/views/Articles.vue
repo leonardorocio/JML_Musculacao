@@ -1,5 +1,5 @@
 <template>
-  <body class="no-margin">
+  <body class="no-margin color-body">
     <nav
       class="navbar navbar-expand-lg navbar-light"
       style="background-color: black"
@@ -38,11 +38,16 @@
       </div>
     </nav>
 
+    <div class="container-fluid d-flex justify-content-center">
+      <p class="display-3 mt-3">Artigos</p>
+    </div>
+
+    <div class="container-fluid w-75 articles-block mt-3">
     <form>
       <div
         class="form-group container-fluid d-flex flex-column align-items-start wide"
       >
-        <label for="search" class="mt-2">Procure por artigos: </label>
+        <label for="search" class="mt-2 font-weight-bold">Procure por artigos: </label>
         <input
           type="search"
           name="searcher"
@@ -108,6 +113,11 @@
         :per-page="perPage"
         aria-controls="articleImg"
       ></b-pagination>
+    </div>
+    </div>
+
+    <div class="container-fluid mt-5 p-0 bg-dark d-flex justify-content-center">
+      <span class="text-white">Copyright © 2021 - JML Musculação</span>
     </div>
   </body>
 </template>

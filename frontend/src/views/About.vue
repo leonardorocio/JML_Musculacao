@@ -2,7 +2,6 @@
     <body>
         <nav
       class="navbar navbar-expand-lg navbar-light"
-      style="background-color: black"
     >
       <img
         src="../assets/logo.png"

@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <body class="color-body">
     <nav
       class="navbar navbar-expand-lg navbar-light"
       style="background-color: black"
@@ -125,50 +125,103 @@
     </p>
     <br />
     <br /> -->
-    <!-- Isso aqui é um componente, que vai ser gerado quando for chamado um botão mostrar treinos -->
-    <div class="container-fluid mt-3" style="width: 90%;">
-      <p class="display-4 mr-6">Treinos</p>
 
-    <ul class="mt-5" v-for="workout in workouts" :key="workout.id" id="workout-list">
-      <div
-        class="
-          card
-          w-25
-          d-flex
-          flex-column
-          justify-content-center
-        "
-        id="article-text"
-      >
-        <div class="card-img">
-          <img :src="workout.descricao" id="workout-image" />
+    <div class="container-fluid d-flex justify-content-center mt-3">
+      <p class="display-4">Treinos</p>
+    </div>
+
+    <div class="container-fluid w-75 articles-block mt-3 d-flex flex-column ">
+      <form>
+        <div
+          class="
+            form-group
+            container-fluid
+            d-flex
+            flex-column
+            align-items-start
+            wide
+          "
+        >
+          <label for="search" class="mt-2 font-weight-bold"
+            >Procure por treinos:
+          </label>
+          <input
+            type="search"
+            name="searcher"
+            ref="searcher"
+            class="form-control w-100"
+            id="search"
+            placeholder="Digite aqui"
+          />
         </div>
+      </form>
 
-        <div class="card-body">
-          <div class="card-text">
-            <li>
-              <h5 class="card-title p-0 m-0">Treino: {{ workout.body_part }}</h5>
-            </li>
-            <li>
-              <span>Nível: {{ workout.avg_level }}</span>
-            </li>
-            <ul v-for="exercise in workout.exercise" :key="exercise">
-              <li>
-                <router-link
-                  id='workout-exercises'
-                  :to="{
-                    name: 'Exercicio',
-                    params: { id: replaceSpace(exercise), title: exercise },
-                  }"
-                  >{{ exercise }}</router-link
-                >
-              </li>
-            </ul>
+      <div class="container w-100 d-flex justify-content-around ">
+        <ul
+          class="mt-4 mr-5"
+          v-for="workout in workouts"
+          :key="workout.id"
+          id="workout-list"
+        >
+          <div
+            class="card w-100 d-flex flex-column justify-content-center"
+            id="article-text"
+          >
+            <img class="card-img-top" :src="imageDescription(workout.id - 1)" />
+
+            <div class="card-body">
+              <div class="card-text">
+                <li>
+                  <h5 class="card-title p-0 m-0">
+                    Treino: {{ workout.body_part }}
+                  </h5>
+                </li>
+                <li>
+                  <p>Nível: {{ workout.avg_level }}</p>
+                </li>
+                <li>
+                  <button class="btn btn-primary p-2 mt-1">
+                    <router-link
+                      class="text-white"
+                      :to="{
+                        name: 'Exercicio',
+                        params: { id: workout.id, title: workout.body_part },
+                      }"
+                    >
+                      Saiba Mais
+                    </router-link>
+                  </button>
+                </li>
+                <!-- <ul v-for="exercise in workout.exercise" :key="exercise">
+                <li>
+                  <router-link
+                    id="workout-exercises"
+                    :to="{
+                      name: 'Exercicio',
+                      params: { id: replaceSpace(exercise), title: exercise },
+                    }"
+                    >{{ exercise }}</router-link
+                  >
+                </li>
+              </ul> -->
+              </div>
+            </div>
           </div>
-        </div>
+        </ul>
+        <!-- </div> -->
       </div>
-    </ul>
-    <!-- </div> -->
+
+      <b-pagination
+        class="d-flex justify-content-center align-items-end mt-5"
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        aria-controls="articleImg"
+      ></b-pagination>
+    </div>
+
+    <div class="container-fluid mt-5 p-0 bg-dark d-flex justify-content-center">
+      <span class="text-white">Copyright © 2021 - JML Musculação</span>
     </div>
   </body>
 </template>
@@ -184,6 +237,8 @@ export default {
       workouts: [],
       addUserWorkouts: [],
       userWorkouts: sessionStorage.workout.split(","),
+      perPage: 3,
+      currentPage: 1
     };
   },
   created() {
@@ -200,6 +255,7 @@ export default {
       });
       this.workouts = workout.data;
       console.log(this.workouts);
+      console.log(this.workouts.descricao)
     },
     replaceSpace(word) {
       word = word
@@ -214,6 +270,10 @@ export default {
     },
     deleteUserWorkout(index) {
       this.userWorkouts.splice(index, 1);
+    },
+    imageDescription(index) {
+      var image_link = this.workouts[index].descricao.split('firebase');
+      return 'https://firebase' + image_link[1];
     },
     sendUserWorkout() {
       let sendWorkout = {};
@@ -245,8 +305,8 @@ export default {
     },
   },
   computed: {
-    originalWorkout() {
-      return sessionStorage.workout.split(",");
+    rows() {
+      return this.workouts.length;
     },
   },
 };

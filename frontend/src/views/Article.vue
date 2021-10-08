@@ -1,7 +1,7 @@
 <template>
-  <body>
+  <body class="color-body">
     <nav
-      class="navbar navbar-expand-lg navbar-light"
+      class="navbar navbar-expand-lg navbar-light navs"
       style="background-color: black"
     >
       <img
@@ -72,14 +72,15 @@
     </nav>
 
     <div
-      class="container w-75 mt-5 d-flex flex-column align-items-center justify-content-center"
-    >
+      class="container-fluid w-75 mt-3 d-flex flex-column align-items-center justify-content-center"
+      id="color-test">
       <span class="display-4">{{ article.title }}</span>
       <br />
 
       <div
         class="card w-75 d-flex flex-column align-items-center justify-content-center"
         id="article-text"
+        style="border-radius: 15px;"
       >
         <span id="summernote">
           {{ article.text }}
@@ -101,7 +102,7 @@
       <span class="display-4" v-else
         >Comentários ({{ comments.comments.length }}):
       </span>
-      <div class="card w-100 d-flex flex-column mt-2">
+      <div class="card w-100 d-flex flex-column mt-2" style="border-radius: 20px;">
         <div class="card w-75 ml-4 mt-4" style="border: none">
           <h4 class="card-title pl-3">Comente!</h4>
           <form class="container w-100 d-flex flex-column pl-3">

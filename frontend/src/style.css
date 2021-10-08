@@ -194,3 +194,14 @@
   text-decoration: none;
   color: #4bd1a0;
 }
+
+.color-body {
+  background-color: #4bd1a0;
+}
+
+.articles-block {
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+}
+
