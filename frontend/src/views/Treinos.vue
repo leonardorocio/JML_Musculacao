@@ -239,7 +239,7 @@
             class="card w-100 d-flex flex-column justify-content-center"
             id="article-text"
           >
-            <img class="card-img-top" :src="imageDescription(workout.id - 1)" />
+            <img class="card-img-top" :src="imageDescription(workout.id - 1)" id="image-workout" />
 
             <div class="card-body">
               <div class="card-text">

@@ -201,6 +201,10 @@
   border-radius: 20px;
 }
 
+#workout-list {
+  list-style-type: none;
+}
+
 #workout-list :last-child {
   margin-bottom: 1em;
 }
@@ -232,4 +236,8 @@
   background-size: 100%;
   background-repeat: no-repeat;
   height: 50vh;
+}
+
+#image-workout {
+  height: 150px;
 }

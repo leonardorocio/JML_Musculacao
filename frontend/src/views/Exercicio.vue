@@ -109,8 +109,36 @@
         <li class="list-group-item">Intervalo entre séries: 60 segundos</li>
         <li class="list-group-item">Como fazer: <a href="https://www.youtube.com/watch?v=hU-B0R6U-4A&ab_channel=XTREME21">https://www.youtube.com/watch?v=hU-B0R6U-4A&ab_channel=XTREME21</a></li>
       </ul>
-    </div>
 
+    </div>
+    <div class="container-fluid w-50 articles-block mt-3 d-flex flex-column">
+      <h2 class="card-title text-center">Gostaria de adicionar algum exercício pra esse treino? Manda pra gente!</h2>
+      <form action="" >
+        <label for="name">Nome do Exercício:</label>
+        <input type="text" id="name" name="name" placeholder="Ex: Tríceps Banco" class="form-control">
+
+        <label for="level">Nível de Dificuldade:</label>
+        <input type="text" name="level" id="level" placeholder="Avançado, Intermediário ou Iniciante" class="form-control mt-1">
+
+        <label for="series">Quantidade de Séries:</label>
+        <input type="text" name="series" id="series" placeholder="Ex: 4" class="form-control mt-1">
+
+        <label for="reps">Quantidade de Repetições:</label>
+        <input type="text" name="reps" id="reps" placeholder="Ex: 12" class="form-control mt-1">
+
+        <label for="interval">Intervalo médio:</label>
+        <input type="text" name="interval" id="interval" placeholder="Ex: 60 segundos" class="form-control mt-1">
+
+        <button
+            type="button"
+            class="btn btn-primary mt-2 mb-2"
+            id="button-comment"
+            @click="getCurrentPage()"
+          >
+            Salvar
+          </button>
+      </form>
+    </div>
     <div class="container-fluid mt-5 p-0 bg-dark d-flex justify-content-center">
       <span class="text-white">Copyright © 2021 - JML Musculação</span>
     </div>
