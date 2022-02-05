@@ -39,7 +39,15 @@
           <li class="list-inline-item">
             <button
               id="botaoInscricao"
-              class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
+              class="
+                btn btn-outline-success
+                my-2 my-sm-0
+                pl-4
+                pr-4
+                pt-3
+                pb-3
+                mr-3
+              "
             >
               <router-link :to="{ name: 'Dashboard' }" id="auth-link">
                 Meu Perfil
@@ -49,7 +57,15 @@
           <li class="list-inline-item">
             <button
               id="botaoInscricao"
-              class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
+              class="
+                btn btn-outline-success
+                my-2 my-sm-0
+                pl-4
+                pr-4
+                pt-3
+                pb-3
+                mr-3
+              "
               @click="logout()"
             >
               <a id="auth-link"> Sair </a>
@@ -60,7 +76,15 @@
           <li class="list-inline-item">
             <button
               id="botaoInscricao"
-              class="btn btn-outline-success my-2 my-sm-0 pl-4 pr-4 pt-3 pb-3 mr-3"
+              class="
+                btn btn-outline-success
+                my-2 my-sm-0
+                pl-4
+                pr-4
+                pt-3
+                pb-3
+                mr-3
+              "
             >
               <router-link :to="{ name: 'Cadastro' }" id="auth-link">
                 Inscrição
@@ -71,7 +95,14 @@
       </div>
     </nav>
     <div
-      class="container bg-white profiles d-flex flex-column justify-content-around"
+      class="
+        container
+        bg-white
+        profiles
+        d-flex
+        flex-column
+        justify-content-around
+      "
     >
       <h2 class="display-4 text-center" id="meuPerfil">Meu Perfil</h2>
 
@@ -172,15 +203,18 @@
     <div class="container-fluid mt-5 p-0 bg-dark d-flex justify-content-center">
       <span class="text-white">Copyright © 2021 - JML Musculação</span>
     </div>
-
   </body>
 </template>
 
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+
 <script>
 import axios from "axios";
-
-const firebase = require("../components/app.js");
+import {ref} from 'firebase/storage';
 const errorLog = require("../components/backend_errors.js");
+const firebase = require('../components/app.js');
 
 export default {
   data() {
@@ -196,13 +230,29 @@ export default {
     };
   },
   async created() {
+    // this.initFirebase();
     this.getUserProfile();
   },
 
   methods: {
+    // initFirebase() {
+    //   var firebaseConfig = {
+    //       apiKey: "AIzaSyDLmRU7KMoZsByDYCLmrTqCG3wrePa8TnU",
+    //       authDomain: "jml-musculacao.firebaseapp.com",
+    //       databaseURL: "https://jml-musculacao.firebaseio.com",
+    //       projectId: "jml-musculacao",
+    //       storageBucket: "gs://jml-musculacao.appspot.com",
+    //       messagingSenderId: "942758114362",
+    //       appId: "1:942758114362:web:77638d14e485d678a3b103"
+    //   };
+    //   // Initialize Firebase
+    //   firebase.initializeApp(firebaseConfig);
+    // },
+
     uploadToProfile() {
       const facePath = document.getElementById("faceInput").files[0];
       if (facePath != undefined) {
+        // const storRef = firebase.storage().ref()
         const imagesRef = firebase.storRef.child("images/" + facePath.name);
         const uploader = this;
 
