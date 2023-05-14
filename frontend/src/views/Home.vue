@@ -210,7 +210,7 @@ export default {
       try {
         let response = await axios({
           method: "POST",
-          url: "https:/jml-musculacao-admin.herokuapp.com/auths/logout/",
+          url: "http://localhost:8000/auths/logout/",
           data: {
             refresh_token: sessionStorage.refresh,
           },
